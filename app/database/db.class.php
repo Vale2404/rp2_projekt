@@ -3,8 +3,8 @@
 class DB {
     private static $db = null;
     
-    final private function __construct() { }
-    final private function __clone() { }
+    private function __construct() { }
+    private function __clone() { }
 
     public static function getConnection() {
         if(DB::$db === null) {
