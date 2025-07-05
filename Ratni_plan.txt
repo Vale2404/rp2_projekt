@@ -1,0 +1,57 @@
+Tablice u bazi i atributi:
+
+Knjige
+- ID #
+- Autor
+- Naziv
+- Zanr
+- Slika_naslovnice
+- Godina
+- Opis
+- Prosjecna_ocjena
+
+Korisnici
+- ID #
+- Ime
+- Prezime
+- Username
+- Password_hash
+- Mail
+- Lista_zelja
+- Lista_procitano
+
+Recenzije
+- ID_Korisnika #
+- ID_Knjige #
+- Komentar
+- Ocjena
+
+
+
+Stranice/view-ovi koje je potrebno napraviti:
+
+1) Pregled (s filtriranjem / pretrazivanjem) knjiga
+	- link koji otvara 2
+	- gumb kojim dodajes na popis za citanje
+	- checkbox kojim se moze oznaciti dosad procitane
+	- checkbox za zanrove
+	- sortiraj po: naziv knjige, ime autora, godina
+2) Detalji o knjizi i forma za recenziju (ako recenzira dodati na procitano)
+3) Lista zelja
+4) Povijest citanja 
+
+
+
+Što smo obečali napraviti:
+
+- bazu podataka koja sadrži naslove različitih žanrova, autora itd.,
+- mogućnost da korisnik ocijeni i recenzira knjigu,
+- korisnik može stvoriti vlastiti popis knjiga koje bi volio pročitati,
+- korisnik može označiti knjige koje je pročitao,
+- filtriranje knjiga prema različitim kategorijama (žanr, ocjena, godina),
+- rang listu top 5 najbolje ocijenjenih knjiga,
+- pregled svih korisnikovih ocjena i recenzija,
+- administratorske funkcionalnosti: dodavanje novih knjiga, 
+brisanje neprimjerenih komentara korisnika / brisanje korisničkog računa.
+
+
