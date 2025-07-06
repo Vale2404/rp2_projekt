@@ -15,6 +15,8 @@ require_once __SITE_PATH . '/app/' . 'template.class.php';
 // Učitaj definiciju spoja na bazu podataka.
 require_once __SITE_PATH . '/app/database/' . 'db.class.php';
 
+$GLOBALS['pdo'] = DB::getConnection();
+
 
 // Automatsko učitavanja klasa iz modela kad se pozove new.
 spl_autoload_register(function($class_name) {

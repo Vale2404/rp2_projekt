@@ -49,6 +49,8 @@ class Router {
 		$class = $this->controller . 'Controller';
 		$controller = new $class($this->registry);
 
+
+
 		// Provjeri da li controller sadrži traženu akciju.
 		if(method_exists($controller, $this->action) === false)
 			$action = 'index';
@@ -63,7 +65,8 @@ class Router {
 	// Analiziraj $_GET['rt'], odredi ime controllera i akcije.
 	private function getController() {
 		// Dohvati $_GET['rt']
-		$route = (empty($_GET['rt'])) ? '' : $_GET['rt'];
+		$route = (empty($_GET['rt'])) ? 'login' : $_GET['rt'];
+
 
 		if(empty($route))
 			$route = 'index';

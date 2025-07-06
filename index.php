@@ -12,6 +12,8 @@ require_once 'app/init.php';
 
 // Stvori zajednički registry podataka u aplikaciji.
 $registry = new Registry();
+$registry->db = DB::getConnection(); 
+
 
 // Stvori novi router, spremi ga u registry.
 $registry->router = new Router($registry);
