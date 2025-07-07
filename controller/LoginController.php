@@ -34,8 +34,9 @@ class LoginController {
             }
 
             $_SESSION['username'] = 'test';
+            $_SESSION['user_id'] = 11;
             //$_SESSION['test_user'] = true;
-            header('Location: index.php?rt=books');
+            header('Location: index.php?rt=search');
 
             exit();
 
@@ -64,7 +65,8 @@ class LoginController {
         }
 
         $_SESSION['username'] = $username;
-        header('Location: index.php?rt=books');
+        $_SESSION['user_id'] = $user->id;
+        header('Location: index.php?rt=search');
 
         exit();
     }

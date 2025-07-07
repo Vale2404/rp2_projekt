@@ -7,12 +7,18 @@
         <th>Naslov</th>
     </tr>
     <?php foreach($wishlist as $knjiga): ?>
-        <tr class="book-row" data-href="?rt=bookDetails&temp_book_id=<?= urlencode($knjiga->id) ?>">
-            <td>
+        <tr>
+            <td class="book-row" data-href="?rt=bookDetails&temp_book_id=<?= urlencode($knjiga->id) ?>">
                 <img src="images/<?= htmlspecialchars($knjiga->slika_naslovnice) ?>" alt="Naslovnica" class="cover-img">
             </td>
-            <td><?= htmlspecialchars($knjiga->autor) ?></td>
-            <td><?= htmlspecialchars($knjiga->naziv) ?></td>
+            <td class="book-row" data-href="?rt=bookDetails&temp_book_id=<?= urlencode($knjiga->id) ?>"><?= htmlspecialchars($knjiga->autor) ?></td>
+            <td class="book-row" data-href="?rt=bookDetails&temp_book_id=<?= urlencode($knjiga->id) ?>"><?= htmlspecialchars($knjiga->naziv) ?></td>
+            <td>
+                <form method="post" action="index.php?rt=wishlist/delete" style="display:inline;">
+                    <input type="hidden" name="book_id" value="<?= $knjiga->id ?>">
+                    <button type="submit">Makni s liste želja</button>
+                </form>
+            </td>
         </tr>
     <?php endforeach; ?>
 </table>

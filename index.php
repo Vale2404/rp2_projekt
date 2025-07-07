@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // Definiramo globalno vidljive constante:
 // __SITE_PATH = putanja na disku servera do index.php
