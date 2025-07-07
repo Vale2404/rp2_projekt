@@ -17,8 +17,6 @@ Korisnici
 - Username
 - Password_hash
 - Mail
-- Lista_zelja
-- Lista_procitano
 
 Recenzije
 - ID_Korisnika #
@@ -26,6 +24,13 @@ Recenzije
 - Komentar
 - Ocjena
 
+Zelje
+- ID_Korisnika #
+- ID_Knjige #
+
+Procitane
+- ID_Korisnika #
+- ID_Knjige #
 
 
 Stranice/view-ovi koje je potrebno napraviti:
