@@ -1,0 +1,58 @@
+.header-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+/* Navbar */
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #2C3E50;
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* Stilovi za svaki <li> element u navbaru */
+.navbar li {
+    float: left;
+}
+
+/* Stilovi za linkove u navbaru */
+.navbar li a {
+    display: block;
+    color: #ECF0F1;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Stilovi za hover efekt */
+.navbar li a:hover {
+    background-color: #95A5A6;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer {
+    background-color: #2C3E50;
+    color: #ECF0F1;
+    padding: 0.5rem;
+    margin-top: auto;
+}
+
+.book-row:hover,
+.book-row.selected-row {
+    background: #f2f6fa;
+    cursor: pointer;
+}
+.cover-img {
+    width: 80px;
+    height: auto;
+}

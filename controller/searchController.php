@@ -1,6 +1,6 @@
 <?php
 
-class BooksController extends BaseController {
+class SearchController extends BaseController {
     public function index() {
         $ls = new LibraryService();
 

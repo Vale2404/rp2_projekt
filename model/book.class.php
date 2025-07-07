@@ -10,8 +10,8 @@ class Book {
 		$this->zanr = $zanr;
 		$this->slika_naslovnice = $slika_naslovnice;
 		$this->godina = $godina;
-        $this->opis = $prosjecna_ocjena;
-        $this->library = $prosjecna_ocjena;
+        $this->opis = $opis;
+        $this->prosjecna_ocjena = $prosjecna_ocjena;
 	}
 
 	function __get($prop) {
