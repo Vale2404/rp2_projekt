@@ -1,11 +1,11 @@
 <?php
-require_once 'model/UserModel.php';
+require_once 'model/userservice.class.php';
 
 class RegisterController {
-    private $userModel;
+    private $us;
 
     public function __construct($db) {
-        $this->userModel = new UserModel($db);
+        $this->us = new UserService($db);
     }
 
     public function index() {
@@ -47,14 +47,14 @@ class RegisterController {
         }
 
         // postoji li korisnik s istim usernameom vec
-        if ($this->userModel->userExists($username)) {
+        if ($this->us->userExists($username)) {
             $error = 'Korisnik s tim korisničkim imenom već postoji.';
             require 'view/register_form.php';
             return;
         }
 
         // Spremi korisnika u bazu
-        $this->userModel->registerUser($ime, $prezime, $username, $password, $email);
+        $this->us->registerUser($ime, $prezime, $username, $password, $email);
 
         header('Location: index.php?registered=1');
         exit();

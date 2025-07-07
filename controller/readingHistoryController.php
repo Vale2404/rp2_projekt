@@ -2,7 +2,7 @@
 
 class ReadingHistoryController extends BaseController {
     public function index() {
-        $ls = new LibraryService();
+        $ls = new LibraryService($this->registry->db);
 
 		$this->registry->template->naslov = 'Popis pročitanih knjiga';
 		$this->registry->template->readingHistory = [];

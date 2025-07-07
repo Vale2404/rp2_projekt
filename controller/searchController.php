@@ -2,7 +2,7 @@
 
 class SearchController extends BaseController {
     public function index() {
-        $ls = new LibraryService();
+        $ls = new LibraryService($this->registry->db);
 
 		// Popuni template potrebnim podacima
 		$this->registry->template->naslov = 'Popis svih knjiga';

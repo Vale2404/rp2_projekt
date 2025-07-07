@@ -8,7 +8,7 @@ class WishlistController extends BaseController {
         }
 
         $user_id = $_SESSION['user_id'];
-        $ls = new LibraryService();
+        $ls = new LibraryService($this->registry->db);
 
         $wishlist = $ls->getWishList($user_id);
 
@@ -32,7 +32,7 @@ class WishlistController extends BaseController {
         $user_id = $_SESSION['user_id'];
         $book_id = intval($_POST['book_id']);
 
-        $ls = new LibraryService();
+        $ls = new LibraryService($this->registry->db);
         $ls->addBookToWishList($user_id, $book_id);
 
         //Nakon dodavanja vrati korisnika na wishlistu
@@ -53,7 +53,7 @@ class WishlistController extends BaseController {
         $user_id = $_SESSION['user_id'];
         $book_id = intval($_POST['book_id']);
 
-        $ls = new LibraryService();
+        $ls = new LibraryService($this->registry->db);
         $ls->deleteBookFromWishList($user_id, $book_id);
 
         header('Location: index.php?rt=wishlist');

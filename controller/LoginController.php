@@ -1,11 +1,11 @@
 <?php
-require_once 'model/UserModel.php';
+require_once 'model/userservice.class.php';
 
 class LoginController {
-    private $userModel;
+    private $us;
 
     public function __construct($registry) {
-        $this->userModel = new UserModel($registry->db);
+        $this->us = new UserService($registry->db);
     }
 
     public function index() {
@@ -27,8 +27,8 @@ class LoginController {
         // dozvoljavamo ulaz bez unesenih usernamea i passworda radi lakseg testiranja
         if ($username === '' && $password === '') {
             // stvori testnog korisnika ako ga nema u bazi
-            if (!$this->userModel->userExists('test')) {
-                $this->userModel->registerUser(
+            if (!$this->us->userExists('test')) {
+                $this->us->registerUser(
                     'Test', 'Korisnik', 'test', 'test', 'test@mail.com'
                 );
             }
@@ -50,7 +50,7 @@ class LoginController {
         }
 
 
-        $user = $this->userModel->getUserByUsername($username);
+        $user = $this->us->getUserByUsername($username);
 
         if (!$user) {
             $error = 'Korisnik nije registriran.';
