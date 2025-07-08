@@ -14,9 +14,13 @@
             <td class="book-row" data-href="?rt=bookDetails&temp_book_id=<?= urlencode($knjiga->id) ?>"><?= htmlspecialchars($knjiga->autor) ?></td>
             <td class="book-row" data-href="?rt=bookDetails&temp_book_id=<?= urlencode($knjiga->id) ?>"><?= htmlspecialchars($knjiga->naziv) ?></td>
             <td>
-                <form method="post" action="index.php?rt=wishlist/delete" style="display:inline;">
-                    <input type="hidden" name="book_id" value="<?= $knjiga->id ?>">
+                <form method="post" action="index.php?rt=wishlist/delete">
+                    <input type="hidden" name="book_id_wishlist" value="<?= $knjiga->id ?>">
                     <button type="submit">Makni s liste želja</button>
+                </form><br>
+                <form method="post" action="index.php?rt=wishlist/move">
+                    <input type="hidden" name="book_id_wishlist" value="<?= $knjiga->id ?>">
+                    <button type="submit">Premjesti u listu pročitanih</button>
                 </form>
             </td>
         </tr>

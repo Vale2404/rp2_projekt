@@ -6,7 +6,7 @@
         <th>Autor</th>
         <th>Naslov</th>
     </tr>
-    <?php foreach($readingHistory as $knjiga): ?>
+    <?php foreach($readlist as $knjiga): ?>
         <tr class="book-row" data-href="?rt=bookDetails&temp_book_id=<?= urlencode($knjiga->id) ?>">
             <td>
                 <img src="images/<?= htmlspecialchars($knjiga->slika_naslovnice) ?>" alt="Naslovnica" class="cover-img">

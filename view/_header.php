@@ -25,7 +25,7 @@
         <ul class="navbar">
             <li><a href="index.php?rt=search">Pretraga knjiga</a></li>
             <li><a href="index.php?rt=wishlist">Za pročitati</a></li>
-            <li><a href="index.php?rt=readingHistory">Pročitano</a></li>
+            <li><a href="index.php?rt=readlist">Pročitano</a></li>
         </ul>
     </header>
 

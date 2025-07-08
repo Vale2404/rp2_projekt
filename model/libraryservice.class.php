@@ -78,6 +78,29 @@ class LibraryService {
         return $arr;
     }
 
+    public function getReadList($user_id) {
+        try {
+            $st = $this->db->prepare('SELECT k.* FROM Knjige k INNER JOIN Procitane p ON k.ID = p.ID_Knjige WHERE p.ID_Korisnika = :user_id');
+            $st->execute(['user_id' => $user_id]);
+        } catch(PDOException $e) {
+            exit('PDO error ' . $e->getMessage());
+        }
+        $arr = array();
+        while($row = $st->fetch()) {
+            $arr[] = new Book(
+                $row['ID'],
+                $row['Autor'],
+                $row['Naziv'],
+                $row['Zanr'],
+                $row['Slika_naslovnice'], 
+                $row['Godina'],
+                $row['Opis'],
+                $row['Prosjecna_ocjena']
+            );
+        }
+        return $arr;
+    }
+
     public function addBookToWishList($user_id, $book_id) {
         try {
 			$st = $this->db->prepare('INSERT IGNORE INTO Zelje (ID_Korisnika, ID_Knjige) VALUES (?, ?)');

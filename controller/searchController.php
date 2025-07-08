@@ -16,7 +16,16 @@ class SearchController extends BaseController {
             }
         }
 
+        $readlist_ids = [];
+        if(isset($_SESSION['user_id'])) {
+            $readlist = $ls->getReadList($_SESSION['user_id']);
+            foreach ($readlist as $book) {
+                $readlist_ids[] = $book->id;
+            }
+        }
+
         $this->registry->template->wishlist_ids = $wishlist_ids;
+        $this->registry->template->readlist_ids = $readlist_ids;
 
         $this->registry->template->show('books_index');
     }

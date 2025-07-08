@@ -25,18 +25,18 @@ class WishlistController extends BaseController {
             header('Location: index.php?rt=login');
             exit();
         }
-        if(!isset($_POST['book_id'])) {
+        if(!isset($_POST['book_id_wishlist'])) {
             header('Location: index.php?rt=search');
             exit();
         }
         $user_id = $_SESSION['user_id'];
-        $book_id = intval($_POST['book_id']);
+        $book_id = intval($_POST['book_id_wishlist']);
 
         $ls = new LibraryService($this->registry->db);
         $ls->addBookToWishList($user_id, $book_id);
 
-        //Nakon dodavanja vrati korisnika na wishlistu
-        header('Location: index.php?rt=wishlist');
+        //Nakon dodavanja vrati korisnika na popis knjiga
+        header('Location: index.php?rt=search');
         exit();
     }
 
@@ -46,15 +46,37 @@ class WishlistController extends BaseController {
             header('Location: index.php?rt=login');
             exit();
         }
-        if(!isset($_POST['book_id'])) {
+        if(!isset($_POST['book_id_wishlist'])) {
             header('Location: index.php?rt=wishlist');
             exit();
         }
         $user_id = $_SESSION['user_id'];
-        $book_id = intval($_POST['book_id']);
+        $book_id = intval($_POST['book_id_wishlist']);
 
         $ls = new LibraryService($this->registry->db);
         $ls->deleteBookFromWishList($user_id, $book_id);
+
+        header('Location: index.php?rt=wishlist');
+        exit();
+    }
+
+    //Premjesti knjigu iz liste zelja u listu procitanih
+    public function move() {
+        //Obrisi u Zelje + dodaj u Procitane
+        if(!isset($_SESSION['user_id'])) {
+            header('Location: index.php?rt=login');
+            exit();
+        }
+        if(!isset($_POST['book_id_wishlist'])) {
+            header('Location: index.php?rt=wishlist');
+            exit();
+        }
+        $user_id = $_SESSION['user_id'];
+        $book_id = intval($_POST['book_id_wishlist']);
+
+        $ls = new LibraryService($this->registry->db);
+        $ls->deleteBookFromWishList($user_id, $book_id);
+        $ls->addBookToReadList($user_id, $book_id);
 
         header('Location: index.php?rt=wishlist');
         exit();
