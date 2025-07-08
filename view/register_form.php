@@ -1,5 +1,4 @@
-<?php
-?>
+<?php require_once __SITE_PATH . '/view/_header.php'; ?>
 
 <!DOCTYPE html>
 <html>
@@ -20,3 +19,4 @@
 <?php if (!empty($error)) echo "<p style='color:red;'>$error</p>"; ?>
 </body>
 </html>
+<?php require_once __SITE_PATH . '/view/_footer.php'; ?>

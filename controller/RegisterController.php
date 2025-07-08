@@ -5,7 +5,7 @@ class RegisterController {
     private $us;
 
     public function __construct($registry) {
-        $this->userModel = new UserModel($registry->db);
+        $this->userModel = new UserService($registry->db);
     }
 
 
@@ -57,7 +57,8 @@ class RegisterController {
         // Spremi korisnika u bazu
         $this->us->registerUser($ime, $prezime, $username, $password, $email);
 
-        header('Location: index.php?rt=login&registered=1');
+        header('Location: ' . __SITE_URL . '/index.php?rt=login&registered=1');
+
 
         exit();
     }

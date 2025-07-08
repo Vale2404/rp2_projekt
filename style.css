@@ -86,3 +86,24 @@ footer {
 .book-value {
     word-break: break-word;
 }
+.star-rating {
+    direction: rtl;
+    display: inline-flex;
+    font-size: 1.8em;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating label {
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.star-rating input[type="radio"]:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: green;
+}

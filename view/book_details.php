@@ -1,5 +1,5 @@
 <?php require_once __SITE_PATH . '/view/_header.php'; ?>
-
+<div class="book-details-page">
 <div style="display: flex; align-items: flex-start; gap: 30px; margin-bottom: 30px;">
 
     <!-- Slika knjige -->
@@ -39,15 +39,17 @@
 
 <?php if ($moze_recenzirati): ?>
     <h3>Dodaj svoju recenziju</h3>
-    <form action="index.php?rt=bookDetails/recenziraj" method="post">
+    <form action="<?= __SITE_URL ?>/index.php?rt=bookDetails/recenziraj" method="post">
         <input type="hidden" name="book_id" value="<?= htmlspecialchars($knjiga->id) ?>">
 
-        <label for="ocjena">Ocjena (1–5):</label><br>
-        <select name="ocjena" id="ocjena" required>
-            <?php for ($i = 1; $i <= 5; $i++): ?>
-                <option value="<?= $i ?>"><?= $i ?></option>
+        <label for="ocjena">Ocjena:</label><br>
+        <div class="star-rating">
+            <?php for ($i = 5; $i >= 1; $i--): ?>
+                <input type="radio" id="star<?= $i ?>" name="ocjena" value="<?= $i ?>" required>
+                <label for="star<?= $i ?>" title="<?= $i ?> zvjezdica">&#9733;</label>
             <?php endfor; ?>
-        </select><br><br>
+        </div><br>
+
 
         <label for="komentar">Komentar:</label><br>
         <textarea name="komentar" id="komentar" rows="4" cols="50" required></textarea><br><br>
@@ -73,5 +75,5 @@
     </ul>
 <?php endif; ?>
 
-
+</div>
 <?php require_once __SITE_PATH . '/view/_footer.php'; ?>

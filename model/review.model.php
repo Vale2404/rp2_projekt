@@ -30,7 +30,7 @@ class ReviewModel {
         return $rez;
     }
 
-    public function jeRecenzirao($id_korisnika, $id_knjige) {
+    public function jeliRecenzirao($id_korisnika, $id_knjige) {
         $st = $this->db->prepare('
             SELECT 1 FROM Recenzije 
             WHERE ID_Korisnika = :kor AND ID_Knjige = :knj 
@@ -39,6 +39,20 @@ class ReviewModel {
         $st->execute(['kor' => $id_korisnika, 'knj' => $id_knjige]);
         return $st->fetchColumn() !== false;
     }
+
+    public function unesiRecenziju($id_korisnika, $id_knjige, $komentar, $ocjena) {
+        $st = $this->db->prepare('
+            INSERT INTO Recenzije (ID_Korisnika, ID_Knjige, Komentar, Ocjena)
+            VALUES (:kor, :knj, :kom, :ocj)
+        ');
+        $st->execute([
+            'kor' => $id_korisnika,
+            'knj' => $id_knjige,
+            'kom' => $komentar,
+            'ocj' => $ocjena
+        ]);
+    }
+
 
 
 }
