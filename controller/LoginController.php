@@ -14,7 +14,15 @@ class LoginController {
 
 
     public function login() {
+
+        $info = null;
+        if (isset($_GET['registered']) && $_GET['registered'] == 1) {
+            $info = 'Registracija je bila uspješna. Možete se prijaviti.';
+        }
+
         if (!isset($_POST['login'])) {
+            if (isset($info)) $info = $info; 
+
             require 'view/login_form.php';
             return;
         }
@@ -45,6 +53,8 @@ class LoginController {
         // samo jedno prazno polje nije dozvoljeno
         if ($username === '' || $password === '') {
             $error = 'Nedostaje korisničko ime ili lozinka.';
+            if (isset($info)) $info = $info; 
+
             require 'view/login_form.php';
             return;
         }
@@ -54,12 +64,14 @@ class LoginController {
 
         if (!$user) {
             $error = 'Korisnik nije registriran.';
+            if (isset($info)) $info = $info;
             require 'view/login_form.php';
             return;
         }
 
         if (!password_verify($password, $user->password_hash)) {
             $error = 'Neispravna lozinka.';
+            if (isset($info)) $info = $info;
             require 'view/login_form.php';
             return;
         }

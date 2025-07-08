@@ -4,9 +4,10 @@ require_once 'model/userservice.class.php';
 class RegisterController {
     private $us;
 
-    public function __construct($db) {
-        $this->us = new UserService($db);
+    public function __construct($registry) {
+        $this->userModel = new UserModel($registry->db);
     }
+
 
     public function index() {
         $this->register();
@@ -56,7 +57,8 @@ class RegisterController {
         // Spremi korisnika u bazu
         $this->us->registerUser($ime, $prezime, $username, $password, $email);
 
-        header('Location: index.php?registered=1');
+        header('Location: index.php?rt=login&registered=1');
+
         exit();
     }
 }

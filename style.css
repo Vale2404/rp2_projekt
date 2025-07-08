@@ -56,3 +56,33 @@ footer {
     width: 80px;
     height: auto;
 }
+
+.naslovnica { 
+    max-width: 250px;
+    height: auto;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.book-details-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px; /* razmak između slike i tablice */
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.book-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.book-label {
+    font-weight: bold;
+    padding-right: 20px;
+    vertical-align: top;
+    width: 80px; /* manja širina lijevog stupca */
+}
+
+.book-value {
+    word-break: break-word;
+}

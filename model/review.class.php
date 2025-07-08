@@ -1,10 +1,9 @@
 <?php
 
-class Book {
-	protected $id, $id_korisnika, $id_knjige, $komentar, $ocjena;
+class Review {
+	protected $id_korisnika, $id_knjige, $komentar, $ocjena;
 
-	function __construct($id, $id_korisnika, $id_knjige, $komentar, $ocjena) {
-		$this->id = $id;
+	function __construct($id_korisnika, $id_knjige, $komentar, $ocjena) {
         $this->id_korisnika = $id_korisnika;
         $this->id_knjige = $id_knjige;
 		$this->komentar = $komentar;
