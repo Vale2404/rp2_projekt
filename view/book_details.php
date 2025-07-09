@@ -27,7 +27,19 @@
         </tr>
         <tr>
             <td class="book-label">Prosječna ocjena</td>
-            <td class="book-value"><?= htmlspecialchars($knjiga->prosjecna_ocjena) ?></td>
+            <td class="book-value">
+            <?php if ($prosjek_ocjena == 0): ?>
+                <em>Ova knjiga još nije ocijenjena.</em>
+            <?php else: ?>
+                <?= $prosjek_ocjena ?>/5
+                <?php
+                    $rounded = round($prosjek_ocjena);
+                    for ($i = 1; $i <= 5; $i++) {
+                        echo $i <= $rounded ? '★' : '☆';
+                    }
+                ?>
+            <?php endif; ?>
+        </td>
         </tr>
     </table>
     

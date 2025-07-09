@@ -161,6 +161,35 @@ class LibraryService {
             exit('PDO error ' . $e->getMessage());
         }
     }
+
+    public function getTopRatedBooks($broj) {  //biramo hoce biti top 5,10...
+        $st = $this->db->prepare(
+            'SELECT k.*, AVG(r.Ocjena) AS prosjek
+            FROM Knjige k
+            JOIN Recenzije r ON k.ID = r.ID_Knjige
+            GROUP BY k.ID
+            ORDER BY prosjek DESC
+            LIMIT :broj'
+        );
+        $st->bindValue(':broj', $broj, PDO::PARAM_INT);
+        $st->execute();
+        return $st->fetchAll();
+    }
+
+    public function getMostPopularBooks($broj) {
+        $st = $this->db->prepare(
+            'SELECT k.*, 
+                (SELECT COUNT(*) FROM Zelje z WHERE z.ID_Knjige = k.ID) +
+                (SELECT COUNT(*) FROM Procitane p WHERE p.ID_Knjige = k.ID) AS popularnost
+            FROM Knjige k
+            ORDER BY popularnost DESC
+            LIMIT :broj'
+        );
+        $st->bindValue(':broj', $broj, PDO::PARAM_INT);
+        $st->execute();
+        return $st->fetchAll();
+    }
+
 }
 
 ?>

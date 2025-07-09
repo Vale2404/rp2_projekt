@@ -53,6 +53,14 @@ class ReviewModel {
         ]);
     }
 
+    public function izracunajProsjecnuOcjenu($book_id) {
+    $st = $this->db->prepare('SELECT AVG(Ocjena) AS prosjek FROM Recenzije WHERE ID_Knjige = :id');
+    $st->execute(['id' => $book_id]);
+    $row = $st->fetch();
+    return $row['prosjek'] ?? 0;
+}
+
+
 
 
 }
