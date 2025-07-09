@@ -4,19 +4,21 @@ require_once 'model/userservice.class.php';
 class RegisterController {
     private $us;
 
-    public function __construct($db) {
-        $this->us = new UserService($db);
+    public function __construct($registry) {
+        $this->userModel = new UserService($registry->db);
+        $this->us = $this->userModel;
     }
 
+    // GET: prikaz forme
     public function index() {
-        $this->register();
+        require 'view/register_form.php';
     }
 
-
+    // POST: obrada forme
     public function register() {
-        if (!isset($_POST['username'])) {
-            require 'view/register_form.php';
-            return;
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: ' . __SITE_URL . '/index.php?rt=register');
+            exit();
         }
 
         $ime = trim($_POST['ime']);
@@ -25,38 +27,33 @@ class RegisterController {
         $password = $_POST['password'];
         $email = trim($_POST['email']);
 
-        // Provjera da su polja ime i prezime unesena 
         if ($ime === '' || $prezime === '') {
-            $error = 'Molimo unesite ime i prezime.';
-            require 'view/register_form.php';
-            return;
+            $_SESSION['register_error'] = 'Molimo unesite ime i prezime.';
+            header('Location: ' . __SITE_URL . '/index.php?rt=register');
+            exit();
         }
 
-        
-        if (!preg_match('/^[A-Za-z0-9.]{3,10}$/', $username))  {
-            $error = 'Korisničko ime treba imati 3–10 znakova.';
-            require 'view/register_form.php';
-            return;
+        if (!preg_match('/^[A-Za-z0-9.]{3,10}$/', $username)) {
+            $_SESSION['register_error'] = 'Korisničko ime treba imati 3–10 znakova.';
+            header('Location: ' . __SITE_URL . '/index.php?rt=register');
+            exit();
         }
 
-        
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $error = 'Neispravan e-mail.';
-            require 'view/register_form.php';
-            return;
+            $_SESSION['register_error'] = 'Neispravan e-mail.';
+            header('Location: ' . __SITE_URL . '/index.php?rt=register');
+            exit();
         }
 
-        // postoji li korisnik s istim usernameom vec
         if ($this->us->userExists($username)) {
-            $error = 'Korisnik s tim korisničkim imenom već postoji.';
-            require 'view/register_form.php';
-            return;
+            $_SESSION['register_error'] = 'Korisnik s tim korisničkim imenom već postoji.';
+            header('Location: ' . __SITE_URL . '/index.php?rt=register');
+            exit();
         }
 
-        // Spremi korisnika u bazu
         $this->us->registerUser($ime, $prezime, $username, $password, $email);
 
-        header('Location: index.php?registered=1');
+        header('Location: ' . __SITE_URL . '/index.php?rt=login&registered=1');
         exit();
     }
 }

@@ -1,13 +1,15 @@
-<?php
-?>
+<?php /*require_once __SITE_PATH . '/view/_header.php';*/ ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <title>Registracija</title>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
+<h1>Knjigomat</h1>
 <h2>Registracija </h2>
 <form method="post" action="">
     Ime: <input type="text" name="ime"><br><br>
@@ -20,3 +22,4 @@
 <?php if (!empty($error)) echo "<p style='color:red;'>$error</p>"; ?>
 </body>
 </html>
+<?php require_once __SITE_PATH . '/view/_footer.php'; ?>

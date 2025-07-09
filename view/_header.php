@@ -33,6 +33,8 @@
     </header>
 
     <main>
+ <?php if (isset($naslov)): ?>
     <div class="header-row">
-        <h2><?= $naslov ?></h2>
+        <h2><?= htmlspecialchars($naslov) ?></h2>
     </div>
+<?php endif; ?>
