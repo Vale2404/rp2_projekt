@@ -1,4 +1,4 @@
-<?php require_once __SITE_PATH . '/view/_header.php'; ?>
+<?php /*require_once __SITE_PATH . '/view/_header.php'; */?>
 
 <!DOCTYPE html>
 <html lang="hr">
@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Goodreads klon</h1>
+    <h1>Knjigomat</h1>
     <h2>Prijava </h2>
    <?php if (isset($_GET['registered']) && $_GET['registered'] == 1): ?>
     <p style="color: green;">Registracija uspješna! Možete se prijaviti.</p>

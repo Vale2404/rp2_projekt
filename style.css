@@ -107,3 +107,7 @@ footer {
 .star-rating label:hover ~ label {
     color: green;
 }
+div.book-details-page,
+div.book-details-page * {
+    font-size: 1.3rem !important;
+}
