@@ -1,6 +1,6 @@
 <?php
 
-class Book {
+class Book implements JsonSerializable {
 	protected $id, $autor, $naziv, $zanr, $slika_naslovnice, $godina, $opis, $prosjecna_ocjena;
 
 	function __construct($id, $autor, $naziv, $zanr, $slika_naslovnice, $godina, $opis, $prosjecna_ocjena) {
@@ -20,6 +20,20 @@ class Book {
 	function __set($prop, $val) {
         $this->$prop = $val;
         return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'Id' => $this->id,
+            'Autor' => $this->autor,
+            'Naziv' => $this->naziv,
+            'Zanr' => $this->zanr,
+            'Slika_naslovnice' => $this->slika_naslovnice,
+            'Godina' => $this->godina,
+            'Opis' => $this->opis,
+            'Prosjecna_ocjena' => $this->prosjecna_ocjena
+        ];
     }
 }
 

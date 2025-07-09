@@ -17,7 +17,7 @@ class ReadlistController extends BaseController {
         $this->registry->template->show('readlist');
     }
 
-     //Dodaj knjigu na listu procitanih
+    //Dodaj knjigu na listu procitanih
     public function add() {
         if(!isset($_SESSION['user_id'])) {
             header('Location: index.php?rt=login');

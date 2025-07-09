@@ -56,3 +56,118 @@ footer {
     width: 80px;
     height: auto;
 }
+
+#add-book-form {
+    background: #fff;
+    box-shadow: 0 4px 16px rgba(40,40,70,0.10);
+    border-radius: 18px;
+    padding: 28px 32px 22px 32px;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+}
+#add-book-form label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    color: #24245b;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+#add-book-form input[type="text"],
+#add-book-form input[type="number"],
+#add-book-form textarea {
+    background: #f7f8fa;
+    border: 1px solid #e3e6ef;
+    border-radius: 8px;
+    padding: 3px 5px;
+    font-size: 1rem;
+    margin-top: 2px;
+    transition: border 0.17s;
+}
+#add-book-form input[type="text"]:focus,
+#add-book-form input[type="number"]:focus,
+#add-book-form textarea:focus {
+    border: 1.5px solid #8183f6;
+    outline: none;
+    background: #f4f5fe;
+}
+#add-book-form button[type="submit"] {
+    background: linear-gradient(90deg, #8183f6 0%, #6466e9 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 0;
+    margin-top: 4px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s;
+    box-shadow: 0 2px 8px rgba(50,50,80,0.07);
+}
+#add-book-form button[type="submit"]:hover {
+    background: linear-gradient(90deg, #6466e9 0%, #8183f6 100%);
+    color: #f5f5f7;
+}
+#add-book-msg {
+    padding: 8px 0 0 2px;
+    min-height: 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+}
+
+#books-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+    background: transparent;
+}
+#books-table thead th {
+    background: #f5f5f7;
+    color: #333;
+    font-weight: bold;
+    padding: 12px;
+    border: none;
+    text-align: left;
+    letter-spacing: 0.03em;
+    font-size: 1rem;
+}
+#books-table tbody tr {
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(40,40,70,0.09);
+    border-radius: 14px;
+    transition: box-shadow 0.15s;
+}
+#books-table tbody tr:hover {
+    box-shadow: 0 8px 24px rgba(30,30,60,0.15);
+    background: #fafafe;
+}
+#books-table tbody td {
+    padding: 14px 12px;
+    border: none;
+    font-size: 0.98rem;
+    vertical-align: middle;
+}
+#books-table tbody tr td:first-child {
+    border-top-left-radius: 14px;
+    border-bottom-left-radius: 14px;
+}
+#books-table tbody tr td:last-child {
+    border-top-right-radius: 14px;
+    border-bottom-right-radius: 14px;
+}
+.delete-btn {
+    background: #ffeded;
+    color: #e53e3e;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+}
+.delete-btn:hover {
+    background: #ffe0e0;
+    color: #a80606;
+}

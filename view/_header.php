@@ -26,6 +26,9 @@
             <li><a href="index.php?rt=search">Pretraga knjiga</a></li>
             <li><a href="index.php?rt=wishlist">Za pročitati</a></li>
             <li><a href="index.php?rt=readlist">Pročitano</a></li>
+            <?php if(isset($_SESSION['jel_admin']) && $_SESSION['jel_admin'] == 1): ?>
+                <li><a href="index.php?rt=admin">Administracija</a></li>
+            <?php endif; ?>
         </ul>
     </header>
 

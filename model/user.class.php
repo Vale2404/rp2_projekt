@@ -1,15 +1,16 @@
 <?php
 
 class User {
-	protected $id, $ime, $prezime, $username, $password_hash, $mail;
+	protected $id, $ime, $prezime, $username, $password_hash, $mail, $jel_admin;
 
-	function __construct($id, $ime, $prezime, $username, $password_hash, $mail) {
+	function __construct($id, $ime, $prezime, $username, $password_hash, $mail, $jel_admin) {
 		$this->id = $id;
         $this->ime = $ime;
         $this->prezime = $prezime;
 		$this->username = $username;
 		$this->password_hash = $password_hash;
         $this->mail = $mail;
+        $this->jel_admin = $jel_admin;
 	}
 
 	function __get($prop) {

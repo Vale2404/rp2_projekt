@@ -55,6 +55,31 @@ class LibraryService {
         }
     }
 
+    public function addBook($Autor, $Naziv, $Zanr, $Slika_naslovnice, $Godina, $Opis) {
+        try {
+            $st = $this->db->prepare('INSERT INTO Knjige (Autor, Naziv, Zanr, Slika_naslovnice, Godina, Opis, Prosjecna_ocjena) VALUES (:Autor, :Naziv, :Zanr, :Slika_naslovnice, :Godina, :Opis, 0)');
+            $st->execute([
+                'Autor' => $Autor,
+                'Naziv' => $Naziv,
+                'Zanr' => $Zanr,
+                'Slika_naslovnice' => $Slika_naslovnice,
+                'Godina' => $Godina,
+                'Opis' => $Opis
+            ]);
+        } catch (PDOException $e) {
+            exit('PDO error ' . $e->getMessage());
+        }
+    }
+
+    public function deleteBook($book_id) {
+        try {
+            $st = $this->db->prepare('DELETE FROM Knjige where id=?');
+            $st->execute([$book_id]);
+        } catch (PDOException $e) {
+            exit('PDO error ' . $e->getMessage());
+        }
+    }
+
     public function getWishList($user_id) {
         try {
             $st = $this->db->prepare('SELECT k.* FROM Knjige k INNER JOIN Zelje z ON k.ID = z.ID_Knjige WHERE z.ID_Korisnika = :user_id');

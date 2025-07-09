@@ -35,7 +35,7 @@ class LoginController {
 
             $_SESSION['username'] = 'test';
             $_SESSION['user_id'] = 11;
-            //$_SESSION['test_user'] = true;
+            $_SESSION['jel_admin'] = 1;
             header('Location: index.php?rt=search');
 
             exit();
@@ -48,7 +48,6 @@ class LoginController {
             require 'view/login_form.php';
             return;
         }
-
 
         $user = $this->us->getUserByUsername($username);
 
@@ -66,6 +65,7 @@ class LoginController {
 
         $_SESSION['username'] = $username;
         $_SESSION['user_id'] = $user->id;
+        $_SESSION['jel_admin'] = $user->jel_admin;
         header('Location: index.php?rt=search');
 
         exit();

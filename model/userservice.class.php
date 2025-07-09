@@ -17,14 +17,15 @@ class UserService {
     public function registerUser($ime, $prezime, $username, $password, $email) {
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
-        $st = $this->db->prepare('INSERT INTO Korisnici (Ime, Prezime, Username, Password_Hash, Mail)
-                                VALUES (:ime, :prezime, :username, :password, :mail)');
+        $st = $this->db->prepare('INSERT INTO Korisnici (Ime, Prezime, Username, Password_Hash, Mail, jel_admin)
+                                VALUES (:ime, :prezime, :username, :password, :mail, :jel_admin)');
         $st->execute([
             'ime' => $ime,
             'prezime' => $prezime,
             'username' => $username,
             'password' => $hash,
-            'mail' => $email
+            'mail' => $email,
+            'jel_admin' => 0
         ]);
     }
 
@@ -43,7 +44,8 @@ class UserService {
             $row['Prezime'],
             $row['Username'],
             $row['Password_Hash'],
-            $row['Mail']
+            $row['Mail'],
+            $row['jel_admin']
         );
     }
 }
