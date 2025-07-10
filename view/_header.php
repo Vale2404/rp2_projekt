@@ -24,6 +24,7 @@
         </div>
         <ul class="navbar">
             <li><a href="index.php?rt=search">Pretraga knjiga</a></li>
+            <li><a href="index.php?rt=popular">Najpopularnije knjige</a></li>
             <li><a href="index.php?rt=wishlist">Za pročitati</a></li>
             <li><a href="index.php?rt=readlist">Pročitano</a></li>
             <?php if(isset($_SESSION['jel_admin']) && $_SESSION['jel_admin'] == 1): ?>
@@ -35,6 +36,6 @@
     <main>
  <?php if (isset($naslov)): ?>
     <div class="header-row">
-        <h2><?= htmlspecialchars($naslov) ?></h2>
+        <h1><?= htmlspecialchars($naslov) ?></h1>
     </div>
 <?php endif; ?>
