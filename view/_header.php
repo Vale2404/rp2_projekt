@@ -18,7 +18,7 @@
         <div class="header-row">
             <h1>Knjigomat</h1>
             <form action="index.php" method="post">
-                <span class="user-greeting">Bok, Hardcoded User !</span> <br>
+                <span class="user-greeting">Bok, <?= $_SESSION['username'] ?>!</span> <br>
                 <input type="submit" value="Odjavite se" name="btn_logout" class="logout">
             </form>
         </div>

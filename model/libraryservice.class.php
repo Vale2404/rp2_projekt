@@ -161,6 +161,20 @@ class LibraryService {
             exit('PDO error ' . $e->getMessage());
         }
     }
+
+    public function updateBook($id, $atribut, $vrijednost) {
+        $dozvoljeniAtributi = ['Autor', 'Naziv', 'Zanr', 'Slika_naslovnice', 'Godina', 'Opis'];
+        if(!in_array($atribut, $dozvoljeniAtributi)) {
+            throw new Exception('Neispravan atribut!');
+        }
+        try {
+            $sql = "UPDATE Knjige SET $atribut = :vrijednost WHERE ID = :id";
+			$st = $this->db->prepare($sql);
+			$st->execute(['vrijednost' => $vrijednost, 'id' => $id]);
+        } catch(PDOException $e) {
+            exit('PDO error ' . $e->getMessage());
+        }
+    }
 }
 
 ?>
