@@ -28,7 +28,13 @@
             <li><a href="index.php?rt=wishlist">Za pročitati</a></li>
             <li><a href="index.php?rt=readlist">Pročitano</a></li>
             <?php if(isset($_SESSION['jel_admin']) && $_SESSION['jel_admin'] == 1): ?>
-                <li><a href="index.php?rt=admin">Administracija</a></li>
+                <li class="dropdown">
+                    <a href="#">Administracija &#9662;</a>
+                    <ul class="dropdown-content">
+                        <li><a href="index.php?rt=admin/books">Knjige</a></li>
+                        <li><a href="index.php?rt=admin/users">Korisnici</a></li>
+                    </ul>
+                </li>
             <?php endif; ?>
         </ul>
     </header>

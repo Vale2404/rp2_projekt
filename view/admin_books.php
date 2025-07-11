@@ -35,6 +35,7 @@
         </tbody>
     </table>
     </section><br>
+</main>
 
     <script>
     function ucitajKnjige() {

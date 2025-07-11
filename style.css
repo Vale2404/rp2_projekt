@@ -9,16 +9,12 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     background-color: #2C3E50;
     display: flex;
     justify-content: flex-start;
 }
 
 /* Stilovi za svaki <li> element u navbaru */
-.navbar li {
-    float: left;
-}
 
 /* Stilovi za linkove u navbaru */
 .navbar li a {
@@ -32,6 +28,40 @@
 /* Stilovi za hover efekt */
 .navbar li a:hover {
     background-color: #95A5A6;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    z-index: 100;
+    border-radius: 0 0 8px 8px;
+    padding: 0;
+    list-style-type: none;
+}
+
+.dropdown-content li {
+    float: none;
+}
+
+.dropdown-content a {
+    background-color: #7898b8;
+}
+
+.dropdown-content a:hover {
+    background-color: #95A5A6;
+}
+
+/* Dropdown prikaži na hover */
+.dropdown:hover .dropdown-content,
+.dropdown:focus-within .dropdown-content {
+    display: block;
 }
 
 body {
@@ -116,6 +146,7 @@ footer {
     color: #f5f5f7;
 }
 
+#users-msg,
 #add-book-msg {
     position: fixed;
     right: 32px;
@@ -138,16 +169,19 @@ footer {
     border-left: 6px solid #e5e7eb;
 }
 
+#users-msg.show,
 #add-book-msg.show {
     opacity: 1;
     transform: translateY(0);
 }
 
+#users-msg.success,
 #add-book-msg.success {
     background: #e8faee;
     color: #237043;
     border-left: 6px solid #50bc8a;
 }
+#users-msg.error,
 #add-book-msg.error {
     background: #fbeaea;
     color: #b93e3e;
@@ -362,4 +396,56 @@ div.book-details-page * {
     background: #c72121;
     transform: translateY(-1px) scale(1.03);
     outline: none;
+}
+
+#users-table {
+    width: 80%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin-top: 20px;
+    background: #f8fafc;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 14px rgba(44,62,80, 0.08);
+}
+
+#users-table th,
+#users-table td {
+    padding: 12px 18px;
+    text-align: center;
+}
+
+#users-table thead tr {
+    background-color: #2C3E50;
+    color: #fff;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+}
+
+#users-table tbody tr {
+    transition: background 0.2s;
+    font-size: 0.98rem;
+}
+
+#users-table tbody tr:nth-child(even) {
+    background: #ecf0f1;
+}
+
+#users-table tbody tr:nth-child(odd) {
+    background: #f8fafc;
+}
+
+#users-table tbody tr:hover {
+    background: #d7eaf3;
+}
+
+#users-table th:first-child,
+#users-table td:first-child {
+    border-top-left-radius: 8px;
+}
+
+#users-table th:last-child,
+#users-table td:last-child {
+    border-top-right-radius: 8px;
 }

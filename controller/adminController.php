@@ -5,9 +5,22 @@ class AdminController extends BaseController {
     public function index()
     {
         $this->provjeraAdmina();
+        $this->registry->template->naslov = 'Administracija knjiga';
+        $this->registry->template->show('admin_books');
+    }
 
-        $this->registry->template->naslov = 'Administracija';
-        $this->registry->template->show('admin_panel');
+    public function books()
+    {
+        $this->provjeraAdmina();
+        $this->registry->template->naslov = 'Administracija knjiga';
+        $this->registry->template->show('admin_books');
+    }
+
+    public function users()
+    {
+        $this->provjeraAdmina();
+        $this->registry->template->naslov = 'Administracija korisnika i recenzija';
+        $this->registry->template->show('admin_users_and_reviews');
     }
 
     public function addBook() {
@@ -84,6 +97,30 @@ class AdminController extends BaseController {
         $ls = new LibraryService($this->registry->db);
         echo json_encode($ls->getAllBooks());
         exit();
+    }
+
+    public function getAllUsersInJSON() {
+        $this->provjeraAdmina();
+        header('Content-Type: application/json');
+        $us = new UserService($this->registry->db);
+        echo json_encode($us->getAllUsers());
+        exit();
+    }
+
+    public function deleteUser() {
+        $this->provjeraAdmina();
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $user_id = $_POST['user_id'];
+            $us = new UserService($this->registry->db);
+            $us->deleteUser($user_id);
+            http_response_code(200);
+            exit();
+        } else {
+            http_response_code(405);
+            echo "Neispravan zahtjev.";
+            exit();
+        }
     }
 
     public function updateBook() {
