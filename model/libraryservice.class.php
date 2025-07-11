@@ -161,6 +161,47 @@ class LibraryService {
             exit('PDO error ' . $e->getMessage());
         }
     }
-}
 
+    function getBySearchAndFilter( $search = '', $sort = '', $genre = [])
+    {
+        $query = 'SELECT `ID` FROM `Knjige`';
+        if($search !== '' || !empty($genre))
+            $query .= ' WHERE ';
+
+        if ($search !== '') {
+//            $query .= '(`Naziv` LIKE :nesto OR `Autor` LIKE :nesto)';
+            $query .= '(`Naziv` LIKE :nesto)';
+        }
+        if (!empty($genre))
+        {
+            if ($search !== '')
+                $query .= ' AND ';
+
+            $query .= '`Zanr` IN (' . implode(', ', array_map([$this->db, 'quote'], $genre)) . ')';
+        }
+        if ($sort !== '') {
+            $query .= ' ORDER BY ' . $sort;
+        }
+        $st = $this->db->prepare($query);
+
+        var_dump($query);    // ispisuje SQL s placeholderima
+        var_dump($genre);    // vidiš sve vrijednosti koje šalješ
+        var_dump($search);   // vidiš što šalješ kao search
+        foreach ($genre as $i => $g)
+            echo "Parametar :zanr$i = $g\n";
+
+        if ($search !== '') {
+            $search = '%' . $search . '%';
+            $st->bindValue(':nesto', $search, PDO::PARAM_STR);
+        }
+        $st->execute();
+
+        $indexi = [];
+        while ($row = $st->fetch()) {
+            $indexi[] = (int) $row['ID'];
+        }
+
+        return $indexi;
+    }
+}
 ?>
