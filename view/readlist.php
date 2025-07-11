@@ -1,6 +1,7 @@
 <?php require_once __SITE_PATH . '/view/_header.php'; ?>
 
 <table id="knjige-tablica">
+    <tbody>
     <tr>
         <th>Naslovnica</th>
         <th>Autor</th>
@@ -15,6 +16,7 @@
             <td><?= htmlspecialchars($knjiga->naziv) ?></td>
         </tr>
     <?php endforeach; ?>
+    </tbody>
 </table>
 
 <?php require_once __SITE_PATH . '/view/_footer.php'; ?>

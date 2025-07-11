@@ -20,16 +20,23 @@
         <div class="header-row">
             <h1>Knjigomat</h1>
             <form action="index.php" method="post">
-                <span class="user-greeting">Bok, Hardcoded User !</span> <br>
+                <span class="user-greeting">Bok, <?= $_SESSION['username'] ?>!</span> <br>
                 <input type="submit" value="Odjavite se" name="btn_logout" class="logout">
             </form>
         </div>
         <ul class="navbar">
             <li><a href="index.php?rt=search">Pretraga knjiga</a></li>
+            <li><a href="index.php?rt=popular">Najpopularnije knjige</a></li>
             <li><a href="index.php?rt=wishlist">Za pročitati</a></li>
             <li><a href="index.php?rt=readlist">Pročitano</a></li>
             <?php if(isset($_SESSION['jel_admin']) && $_SESSION['jel_admin'] == 1): ?>
-                <li><a href="index.php?rt=admin">Administracija</a></li>
+                <li class="dropdown">
+                    <a href="#">Administracija &#9662;</a>
+                    <ul class="dropdown-content">
+                        <li><a href="index.php?rt=admin/books">Knjige</a></li>
+                        <li><a href="index.php?rt=admin/users">Korisnici</a></li>
+                    </ul>
+                </li>
             <?php endif; ?>
         </ul>
     </header>
@@ -37,6 +44,6 @@
     <main>
  <?php if (isset($naslov)): ?>
     <div class="header-row">
-        <h2><?= htmlspecialchars($naslov) ?></h2>
+        <h1><?= htmlspecialchars($naslov) ?></h1>
     </div>
 <?php endif; ?>

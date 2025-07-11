@@ -9,16 +9,12 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     background-color: #2C3E50;
     display: flex;
     justify-content: flex-start;
 }
 
 /* Stilovi za svaki <li> element u navbaru */
-.navbar li {
-    float: left;
-}
 
 /* Stilovi za linkove u navbaru */
 .navbar li a {
@@ -32,6 +28,40 @@
 /* Stilovi za hover efekt */
 .navbar li a:hover {
     background-color: #95A5A6;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    z-index: 100;
+    border-radius: 0 0 8px 8px;
+    padding: 0;
+    list-style-type: none;
+}
+
+.dropdown-content li {
+    float: none;
+}
+
+.dropdown-content a {
+    background-color: #7898b8;
+}
+
+.dropdown-content a:hover {
+    background-color: #95A5A6;
+}
+
+/* Dropdown prikaži na hover */
+.dropdown:hover .dropdown-content,
+.dropdown:focus-within .dropdown-content {
+    display: block;
 }
 
 body {
@@ -52,6 +82,12 @@ footer {
     background: #f2f6fa;
     cursor: pointer;
 }
+
+.book-row:hover td,
+.book-row.selected-row td {
+    background: #f2f6fa;
+}
+
 .cover-img {
     width: 80px;
     height: auto;
@@ -109,21 +145,56 @@ footer {
     background: linear-gradient(90deg, #6466e9 0%, #8183f6 100%);
     color: #f5f5f7;
 }
+
+#users-msg,
 #add-book-msg {
-    padding: 8px 0 0 2px;
-    min-height: 24px;
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
+    z-index: 2000;
+    min-width: 270px;
+    max-width: 340px;
+    padding: 14px 20px;
     font-size: 1rem;
     font-weight: 500;
     letter-spacing: 0.03em;
+    border-radius: 12px;
+    box-shadow: 0 6px 32px rgba(40,50,100,0.13);
+    background: #f5f8fa;
+    color: #2c3a4c;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.26s cubic-bezier(.4,0,.2,1), transform 0.28s cubic-bezier(.4,0,.2,1);
+    pointer-events: none;
+    border-left: 6px solid #e5e7eb;
 }
 
-#books-table {
+#users-msg.show,
+#add-book-msg.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#users-msg.success,
+#add-book-msg.success {
+    background: #e8faee;
+    color: #237043;
+    border-left: 6px solid #50bc8a;
+}
+#users-msg.error,
+#add-book-msg.error {
+    background: #fbeaea;
+    color: #b93e3e;
+    border-left: 6px solid #e67878;
+}
+
+#books-table, #knjige-tablica {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 12px;
     background: transparent;
 }
-#books-table thead th {
+#books-table thead th, #knjige-tablica thead th {
     background: #f5f5f7;
     color: #333;
     font-weight: bold;
@@ -133,27 +204,35 @@ footer {
     letter-spacing: 0.03em;
     font-size: 1rem;
 }
-#books-table tbody tr {
+
+#knjige-tablica th {
+    padding-top: 18px;
+    padding-bottom: 18px;
+    font-size: 1.05rem;
+}
+
+#books-table tbody tr, #knjige-tablica tbody tr {
     background: #fff;
     box-shadow: 0 4px 12px rgba(40,40,70,0.09);
     border-radius: 14px;
     transition: box-shadow 0.15s;
 }
-#books-table tbody tr:hover {
+#books-table tbody tr:hover, #knjige-tablica tbody tr:hover {
     box-shadow: 0 8px 24px rgba(30,30,60,0.15);
     background: #fafafe;
 }
-#books-table tbody td {
+#books-table tbody td, #knjige-tablica tbody td {
     padding: 14px 12px;
     border: none;
     font-size: 0.98rem;
     vertical-align: middle;
+    text-align: center;
 }
-#books-table tbody tr td:first-child {
+#books-table tbody tr td:first-child, #knjige-tablica tbody tr td:first-child {
     border-top-left-radius: 14px;
     border-bottom-left-radius: 14px;
 }
-#books-table tbody tr td:last-child {
+#books-table tbody tr td:last-child, #knjige-tablica tbody tr td:last-child {
     border-top-right-radius: 14px;
     border-bottom-right-radius: 14px;
 }

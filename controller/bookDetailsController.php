@@ -16,6 +16,9 @@ class BookDetailsController extends BaseController {
         $reviewModel = new ReviewModel($this->registry->db);
         $recenzije = $reviewModel->getReviews($book_id);
         $this->registry->template->recenzije = $recenzije;
+        $prosjek = $reviewModel->izracunajProsjecnuOcjenu($book_id);
+        $this->registry->template->prosjek_ocjena = round($prosjek, 2); //racunamo prosjecnu ocjenu
+
 
         $korisnik = $_SESSION['username'] ?? null;
         $moze_recenzirati = false;
