@@ -5,8 +5,7 @@ class RegisterController {
     private $us;
 
     public function __construct($registry) {
-        $this->userModel = new UserService($registry->db);
-        $this->us = $this->userModel;
+        $this->us = new UserService($registry->db);
     }
 
     // GET: prikaz forme

@@ -203,7 +203,6 @@ class LibraryService {
         return $st->fetchAll();
     }
 
-
     function getBySearchAndFilter( $search = '', $sort = '', $genre = [])
     {
         $query = 'SELECT `ID` FROM `Knjige`';
@@ -211,8 +210,7 @@ class LibraryService {
             $query .= ' WHERE ';
 
         if ($search !== '') {
-//            $query .= '(`Naziv` LIKE :nesto OR `Autor` LIKE :nesto)';
-            $query .= '(`Naziv` LIKE :nesto)';
+            $query .= '(`Naziv` LIKE :naziv_djela OR `Autor` LIKE :ime_autora)';
         }
         if (!empty($genre))
         {
@@ -226,15 +224,10 @@ class LibraryService {
         }
         $st = $this->db->prepare($query);
 
-        var_dump($query);    // ispisuje SQL s placeholderima
-        var_dump($genre);    // vidiš sve vrijednosti koje šalješ
-        var_dump($search);   // vidiš što šalješ kao search
-        foreach ($genre as $i => $g)
-            echo "Parametar :zanr$i = $g\n";
-
         if ($search !== '') {
             $search = '%' . $search . '%';
-            $st->bindValue(':nesto', $search, PDO::PARAM_STR);
+            $st->bindValue(':naziv_djela', $search, PDO::PARAM_STR);
+            $st->bindValue(':ime_autora', $search, PDO::PARAM_STR);
         }
         $st->execute();
 
@@ -245,5 +238,13 @@ class LibraryService {
 
         return $indexi;
     }
+    
+    function getAllGenres()
+    {
+        $st = $this->db->prepare('SELECT DISTINCT Zanr FROM Knjige WHERE Zanr IS NOT NULL AND Zanr != \'\' ORDER BY Zanr');
+        $st->execute();
+        return $st->fetchAll(PDO::FETCH_COLUMN, 0);
+    }
+
 }
 ?>

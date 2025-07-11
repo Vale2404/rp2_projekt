@@ -24,25 +24,19 @@ class SearchController extends BaseController {
             }
         }
 
+        $this->registry->template->allGenres = $ls->getAllGenres();
 		$this->registry->template->naslov = 'Pregled svih knjiga';
         $this->registry->template->show('books_index');
     }
 
     public function searchAndFilter()
     {
-        $selectedGenres = $_POST['checkedGenres'] ?? [];
-        $searchText = $_POST["searchText"] ?? "";
-        $sortOption = $_POST["sortOption"] ?? "";
-
-/*
-        print_r($_POST['checkedGenres']);
-        print($_POST["searchText"]);
-        print($_POST["sortOption"]);
-        exit();
- */
+        $_SESSION['searchText'] = $_POST['searchText'] ?? "";
+        $_SESSION['sortOption'] = $_POST['sortOption'] ?? "";
+        $_SESSION['checkedGenres'] = $_POST['checkedGenres'] ?? [];
 
         $ls = new LibraryService($this->registry->db);
-        $indexiFiltriranih = $ls->getBySearchAndFilter($searchText, $sortOption, $selectedGenres);
+        $indexiFiltriranih = $ls->getBySearchAndFilter($_SESSION['searchText'], $_SESSION['sortOption'], $_SESSION['checkedGenres']);
 
         $filtriraneKnjige = [];
         foreach ($indexiFiltriranih as $i) {
@@ -51,9 +45,18 @@ class SearchController extends BaseController {
         }
 
         $this->registry->template->lista_knjiga = $filtriraneKnjige;
+        $this->registry->template->allGenres = $ls->getAllGenres();
         $this->registry->template->naslov = 'Pregled knjiga - filtrirano';
         $this->registry->template->show('books_index');        
     }
+
+    public function resetSearch()
+    {
+        unset($_SESSION['checkedGenres'], $_SESSION['searchText'], $_SESSION['sortOption']);
+        header('Location: index.php?rt=search');
+        exit();
+    }
+
 }
 
 ?>
