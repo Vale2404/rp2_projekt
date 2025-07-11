@@ -1,6 +1,6 @@
 <?php
 
-class Review {
+class Review implements JsonSerializable {
 	protected $id_korisnika, $id_knjige, $komentar, $ocjena;
 
 	function __construct($id_korisnika, $id_knjige, $komentar, $ocjena) {
@@ -16,6 +16,16 @@ class Review {
 	function __set($prop, $val) {
         $this->$prop = $val;
         return $this;
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return [
+            'ID_Korisnika' => $this->id_korisnika,
+            'ID_Knjige' => $this->id_knjige,
+            'Komentar' => $this->komentar,
+            'Ocjena' => $this->ocjena
+        ];
     }
 }
 

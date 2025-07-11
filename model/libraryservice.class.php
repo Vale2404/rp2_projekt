@@ -203,6 +203,33 @@ class LibraryService {
         return $st->fetchAll();
     }
 
+    public function getAllCommentsFromUser($user_id) {
+        try {
+            $st = $this->db->prepare('SELECT * FROM Recenzije WHERE ID_Korisnika = :id');
+            $st->execute(['id' => $user_id]);
+        } catch(PDOException $e) {
+            exit('PDO error ' . $e->getMessage());
+        }
+        $arr = array();
+		while($row = $st->fetch()) {
+			$arr[] = new Review(
+                $row['ID_Korisnika'],
+                $row['ID_Knjige'],
+                $row['Komentar'],
+                $row['Ocjena']
+            );
+        }
+		return $arr;
+    }
+
+    public function deleteReview($user_id, $book_id) {
+        try {
+			$st = $this->db->prepare('DELETE FROM Recenzije WHERE ID_Korisnika = :user_id AND ID_Knjige = :book_id');
+			$st->execute(['user_id' => $user_id, 'book_id' => $book_id]);
+        } catch(PDOException $e) {
+            exit('PDO error ' . $e->getMessage());
+        }
+    }
 }
 
 ?>

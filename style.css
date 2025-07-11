@@ -353,6 +353,7 @@ div.book-details-page * {
     color: #a80606;
 }
 
+.show-comments-btn,
 .add-readlist-btn,
 .add-wishlist-btn,
 .remove-wishlist-btn,
@@ -369,6 +370,7 @@ div.book-details-page * {
     margin-bottom: 7px;
 }
 
+.show-comments-btn:hover,
 .add-readlist-btn:hover,
 .add-wishlist-btn:hover,
 .remove-wishlist-btn:hover,
@@ -398,6 +400,11 @@ div.book-details-page * {
     outline: none;
 }
 
+#users-table td button {
+    display: block;
+    margin-bottom: 10px;
+}
+
 #users-table {
     width: 80%;
     border-collapse: separate;
@@ -414,6 +421,7 @@ div.book-details-page * {
 #users-table td {
     padding: 12px 18px;
     text-align: center;
+    vertical-align: middle;
 }
 
 #users-table thead tr {
@@ -426,6 +434,7 @@ div.book-details-page * {
 #users-table tbody tr {
     transition: background 0.2s;
     font-size: 0.98rem;
+    height: auto;
 }
 
 #users-table tbody tr:nth-child(even) {
@@ -448,4 +457,43 @@ div.book-details-page * {
 #users-table th:last-child,
 #users-table td:last-child {
     border-top-right-radius: 8px;
+}
+
+.comments-table {
+    border-collapse: collapse;
+    width: 95%;
+    margin: 10px auto;
+    background: #e9d9d9;
+    font-size: 0.97em;
+}
+.comments-table th, .comments-table td {
+    border: 1px solid #d3d3d3;
+    padding: 8px 12px;
+    text-align: center;
+}
+.comments-table th {
+    background-color: #f2f2f2;
+    font-weight: 600;
+    color: #31708f;
+}
+.comments-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.delete-review-btn {
+    background: #d9534f;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 4px 14px;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.delete-review-btn:hover {
+    background: #c9302c;
+}
+
+.comments-table td.akcija {
+    display: flex;
+    justify-content: center;
 }
