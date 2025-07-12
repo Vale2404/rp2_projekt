@@ -22,7 +22,6 @@
             <?php endforeach; ?>
     </div>
     <div class="form-buttons">
-        <button type="submit">Pretraži</button>
         <button type="submit" formaction="index.php?rt=search/resetSearch">Poništi pretragu</button>
     </div>
 </form>
