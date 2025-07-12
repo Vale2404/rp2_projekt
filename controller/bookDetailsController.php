@@ -35,6 +35,25 @@ class BookDetailsController extends BaseController {
 
         $this->registry->template->moze_recenzirati = $moze_recenzirati;
 
+        $wishlist_ids = [];
+        $readlist_ids = [];
+
+        if (isset($_SESSION['user_id'])) {
+            $wishlist = $ls->getWishList($_SESSION['user_id']);
+            foreach ($wishlist as $book) {
+                $wishlist_ids[] = $book->id;
+            }
+
+            $readlist = $ls->getReadList($_SESSION['user_id']);
+            foreach ($readlist as $book) {
+                $readlist_ids[] = $book->id;
+            }
+        }
+
+        $this->registry->template->wishlist_ids = $wishlist_ids;
+        $this->registry->template->readlist_ids = $readlist_ids;
+
+
         $this->registry->template->show('book_details');
 
     }

@@ -1,7 +1,7 @@
 <?php require_once __SITE_PATH . '/view/_header.php'; ?>
 
 <h2>Top 5 najbolje ocijenjenih knjiga</h2>
-<table id="knjige-tablica">
+<table  id="knjige-tablica" class="clickable-knjige">
     <tbody>
     <tr>
         <th>Naslovnica</th>
@@ -21,15 +21,15 @@
                 <?= htmlspecialchars($book['Naziv']) ?>
             </td>
             <td>
-                <?= number_format($book['prosjek'], 2) ?>/5
+                <?= number_format($book['prosjek'], 2) ?>/5.00
             </td>
         </tr>
     <?php endforeach; ?>
-    <tbody>
+    </tbody>
 </table>
 
 <h2>Top 5 najpopularnijih knjiga</h2>
-<table id="knjige-tablica">
+<table id="najpopularnije" class="clickable-knjige">
     <tbody>
     <tr>
         <th>Naslovnica</th>
@@ -49,7 +49,7 @@
             </td>
         </tr>
     <?php endforeach; ?>
-    <tbody>
+    </tbody>
 </table>
 
 <?php require_once __SITE_PATH . '/view/_footer.php'; ?>

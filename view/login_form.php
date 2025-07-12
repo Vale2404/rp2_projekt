@@ -20,8 +20,9 @@
         <input type="text" name="username"><br>
         <label>Lozinka:</label><br>
         <input type="password" name="password"><br><br>
-        <input type="submit" name="login" value="Ulogiraj se">
+        <input type="submit" name="login" value="Ulogiraj se" class="login">
     </form>
+    <br>
     <a href="<?= __SITE_URL ?>/index.php?rt=register">Registrirajte se ovdje</a>
 
 

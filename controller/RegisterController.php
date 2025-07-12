@@ -20,6 +20,12 @@ class RegisterController {
             exit();
         }
 
+        if (isset($_POST['go_back_to_login'])) {
+            header('Location: ' . __SITE_URL . '/index.php?rt=login');
+            exit();
+        }
+
+
         $ime = trim($_POST['ime']);
         $prezime = trim($_POST['prezime']);
         $username = trim($_POST['username']);
