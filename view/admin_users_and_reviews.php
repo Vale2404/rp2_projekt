@@ -37,6 +37,7 @@
                     <td>${korisnik.Mail}</td>
                     <td>${korisnik.jel_admin == 1 ? 'Je' : 'Nije'}</td>
                     <td>
+                        <button class="show-comments-btn">Prikaži komentare</button>
                         ${(jelAdmin && !jelTrenutniKorisnik) ? '' : '<button class="delete-btn">Obriši korisnika!</button>'}
                     </td>
                 </tr>`;
@@ -60,6 +61,62 @@
                 ucitajKorisnike();
             }).fail(function() {
                 $('#users-msg').removeClass().addClass('error show').text("Greška prilikom brisanja korisnika.");
+                setTimeout(() => { $('#users-msg').removeClass('show'); }, 2000);
+            });
+        });
+
+        $('#users-table').on('click', '.show-comments-btn', function(){
+            let $row = $(this).closest('tr');
+            let $commentRow = $row.next('.komentar-row');
+
+            if ($commentRow.length) {
+                $commentRow.remove();
+                return;
+            }
+
+            let userId = $row.data('id');
+            $.getJSON('index.php?rt=admin/getAllCommentsFromUserInJSON&user_id=' + userId, function(komentari){
+                let komentariHtml = komentari.length
+                ? `<table class="comments-table" style="width:90%; margin: 0 auto;">
+                        <thead>
+                            <tr>
+                                <th>Knjiga</th>
+                                <th>Komentar</th>
+                                <th>Ocjena</th>
+                                <th>Akcija</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${komentari.map(k => `
+                                <tr>
+                                    <td>${k.ID_Knjige}</td>
+                                    <td>${k.Komentar}</td>
+                                    <td>${k.Ocjena}</td>
+                                    <td class="akcija">
+                                        <button class="delete-review-btn" data-user-id="${k.ID_Korisnika}" data-book-id="${k.ID_Knjige}">
+                                            Obriši komentar
+                                        </button>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>`
+                : '<i>Nema komentara.</i>';
+                $row.after(`<tr class="komentar-row"><td colspan="6">${komentariHtml}</td></tr>`);
+            });
+        });
+
+        $('#users-table').on('click', '.delete-review-btn', function() {
+            let userId = $(this).data('user-id');
+            let bookId = $(this).data('book-id');
+            let $commentRow = $(this).closest('tr');
+            if (!confirm('Jeste li sigurni da želite obrisati ovaj komentar?')) return;
+            $.post('index.php?rt=admin/deleteReview', { user_id: userId, book_id: bookId }, function() {
+                $('#users-msg').removeClass().addClass('success show').text("Obrisan komentar.");
+                setTimeout(() => { $('#users-msg').removeClass('show'); }, 2000);
+                $commentRow.remove();
+            }).fail(function() {
+                $('#users-msg').removeClass().addClass('error show').text("Greška prilikom brisanja komentara.");
                 setTimeout(() => { $('#users-msg').removeClass('show'); }, 2000);
             });
         });

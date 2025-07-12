@@ -129,7 +129,7 @@ footer {
     background: #f4f5fe;
 }
 #add-book-form button[type="submit"] {
-    background: linear-gradient(90deg, #8183f6 0%, #6466e9 100%);
+    background: linear-gradient(90deg, #a5d2f6 0%, #79aef8 100%);
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -142,7 +142,7 @@ footer {
     box-shadow: 0 2px 8px rgba(50,50,80,0.07);
 }
 #add-book-form button[type="submit"]:hover {
-    background: linear-gradient(90deg, #6466e9 0%, #8183f6 100%);
+    background: linear-gradient(90deg, #6792ff 0%, #478eff 100%);
     color: #f5f5f7;
 }
 
@@ -200,7 +200,7 @@ footer {
     font-weight: bold;
     padding: 12px;
     border: none;
-    text-align: left;
+    text-align: center;
     letter-spacing: 0.03em;
     font-size: 1rem;
 }
@@ -385,7 +385,8 @@ div.book-details-page * {
     color: #000;
 }
 
-/* .form-search {
+/*
+.form-search {
     max-width: 420px;
     margin: 34px auto 0 auto;
     padding: 26px 26px 20px 26px;
@@ -400,16 +401,70 @@ div.book-details-page * {
 .form-search input[type="text"] {
     padding: 10px 12px;
     border: 1.5px solid #ccc;
+*/
+.save-btn, .cancel-btn {
+    background: #eef2ff;
+    color: #1976d2;
+    border: none;
+    padding: 8px 14px;
     border-radius: 8px;
-    font-size: 1rem;
-    outline: none;
-    transition: border 0.2s;
-    width: 100%;
-    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
 }
+
+.cancel-btn {
+    margin-top: 7px;
+}
+
+.save-btn:hover {
+    background: #d1e7dd;
+    color: #146c43;
+}
+
+.cancel-btn {
+    background: #fff7f7;
+    color: #b92b2b;
+}
+.cancel-btn:hover {
+    background: #ffe0e0;
+    color: #a80606;
+}
+
+.logout,
+.show-comments-btn,
+.add-readlist-btn,
+.add-wishlist-btn,
+.remove-wishlist-btn,
+.move-readlist-btn,
+.edit-btn {
+    background: #f0f8ff;
+    color: #3761a8;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+    margin-bottom: 7px;
+}
+/*
 .form-search input[type="text"]:focus {
     border: 1.5px solid #007bff;
 }
+*/
+.logout:hover,
+.show-comments-btn:hover,
+.add-readlist-btn:hover,
+.add-wishlist-btn:hover,
+.remove-wishlist-btn:hover,
+.move-readlist-btn:hover,
+.edit-btn:hover {
+    background: #ddeafd;
+    color: #13345d;
+}
+
+/*
 .form-search select {
     padding: 10px 12px;
     border-radius: 8px;
@@ -451,16 +506,39 @@ div.book-details-page * {
 }
 .form-search button[type="submit"] {
     background: #007bff;
-    color: #fff;
-    border: none;
-    padding: 11px 0;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 500;
-    width: 50%;
-    cursor: pointer;
-    transition: background 0.2s;
 }
+*/
+#users-table td button {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#users-table {
+    width: 80%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin-top: 20px;
+    background: #f8fafc;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 14px rgba(44,62,80, 0.08);
+}
+
+#users-table th,
+#users-table td {
+    padding: 12px 18px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#users-table thead tr {
+    background-color: #2C3E50;
+    color: #fff;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+}
+/*
 .form-search button[type="submit"]:hover {
     background: #0056b3;
 }
@@ -479,7 +557,7 @@ div.book-details-page * {
     background: #ececec;
     color: #000;
 }
- */
+*/
 
 .form-search-wide .fsw-row {
     display: flex;
@@ -505,6 +583,8 @@ div.book-details-page * {
     min-width: 150px;
     max-width: 220px;
     flex: 1 1 150px;
+    font-size: 0.98rem;
+    height: auto;
 }
 
 .form-search-wide .checkboxes-row {
@@ -556,4 +636,92 @@ div.book-details-page * {
 .form-search-wide button[type="reset"]:hover {
     background: #ececec;
     color: #000;
+}
+
+#users-table tbody tr {
+    transition: background 0.2s;
+    font-size: 0.98rem;
+    height: auto;
+}
+
+#users-table tbody tr:nth-child(even) {
+    background: #ecf0f1;
+}
+
+#users-table tbody tr:nth-child(odd) {
+    background: #f8fafc;
+}
+
+#users-table tbody tr:hover {
+    background: #d7eaf3;
+}
+
+#users-table th:first-child,
+#users-table td:first-child {
+    border-top-left-radius: 8px;
+}
+
+#users-table th:last-child,
+#users-table td:last-child {
+    border-top-right-radius: 8px;
+}
+
+
+.delete-review-btn {
+    background: #d9534f;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 4px 14px;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.delete-review-btn:hover {
+    background: #c9302c;
+}
+
+#books-table tbody tr.editing {
+    box-shadow: 0 8px 28px rgba(70, 80, 170, 0.17);
+    background: #f0f7ff;
+}
+
+#books-table tbody tr.editing input[type="text"],
+#books-table tbody tr.editing input[type="number"],
+#books-table tbody tr.editing textarea {
+    font-family: inherit;
+    font-size: inherit;
+    padding: 8px 10px;
+    border: 1.5px solid #1976d2;
+    border-radius: 6px;
+    box-sizing: border-box;
+    width: 100%;
+    background: #fff;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.comments-table {
+    border-collapse: collapse;
+    width: 95%;
+    margin: 10px auto;
+    background: #e9d9d9;
+    font-size: 0.97em;
+}
+.comments-table th, .comments-table td {
+    border: 1px solid #d3d3d3;
+    padding: 8px 12px;
+    text-align: center;
+}
+.comments-table th {
+    background-color: #f2f2f2;
+    font-weight: 600;
+    color: #31708f;
+}
+.comments-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.comments-table td.akcija {
+    display: flex;
+    justify-content: center;
 }

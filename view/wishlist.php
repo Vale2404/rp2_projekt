@@ -5,6 +5,7 @@
         <th>Naslovnica</th>
         <th>Autor</th>
         <th>Naslov</th>
+        <th></th>
     </tr>
     <?php foreach($wishlist as $knjiga): ?>
         <tr class="book-row" data-href="?rt=bookDetails&temp_book_id=<?= urlencode($knjiga->id) ?>">

@@ -203,20 +203,44 @@ class LibraryService {
         return $st->fetchAll();
     }
 
-    function getBySearchAndFilter( $search = '', $sort = '', $genre = [])
-    {
+    public function getAllCommentsFromUser($user_id) {
+        try {
+            $st = $this->db->prepare('SELECT * FROM Recenzije WHERE ID_Korisnika = :id');
+            $st->execute(['id' => $user_id]);
+        } catch(PDOException $e) {
+            exit('PDO error ' . $e->getMessage());
+        }
+        $arr = array();
+		while($row = $st->fetch()) {
+			$arr[] = new Review(
+                $row['ID_Korisnika'],
+                $row['ID_Knjige'],
+                $row['Komentar'],
+                $row['Ocjena']
+            );
+        }
+		return $arr;
+    }
+
+    public function deleteReview($user_id, $book_id) {
+        try {
+			$st = $this->db->prepare('DELETE FROM Recenzije WHERE ID_Korisnika = :user_id AND ID_Knjige = :book_id');
+			$st->execute(['user_id' => $user_id, 'book_id' => $book_id]);
+        } catch(PDOException $e) {
+            exit('PDO error ' . $e->getMessage());
+        }
+    }
+
+    function getBySearchAndFilter( $search = '', $sort = '', $genre = []) {
         $query = 'SELECT `ID` FROM `Knjige`';
         if($search !== '' || !empty($genre))
             $query .= ' WHERE ';
-
         if ($search !== '') {
             $query .= '(`Naziv` LIKE :naziv_djela OR `Autor` LIKE :ime_autora)';
         }
-        if (!empty($genre))
-        {
+        if (!empty($genre)) {
             if ($search !== '')
                 $query .= ' AND ';
-
             $query .= '`Zanr` IN (' . implode(', ', array_map([$this->db, 'quote'], $genre)) . ')';
         }
         if ($sort !== '') {
@@ -239,12 +263,10 @@ class LibraryService {
         return $indexi;
     }
     
-    function getAllGenres()
-    {
+    function getAllGenres() {
         $st = $this->db->prepare('SELECT DISTINCT Zanr FROM Knjige WHERE Zanr IS NOT NULL AND Zanr != \'\' ORDER BY Zanr');
         $st->execute();
         return $st->fetchAll(PDO::FETCH_COLUMN, 0);
     }
-
 }
 ?>

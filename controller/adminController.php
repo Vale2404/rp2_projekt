@@ -107,6 +107,15 @@ class AdminController extends BaseController {
         exit();
     }
 
+    public function getAllCommentsFromUserInJSON() {
+        $this->provjeraAdmina();
+        header('Content-Type: application/json');
+        $user_id = (int)($_GET['user_id'] ?? 0);
+        $ls = new LibraryService($this->registry->db);
+        echo json_encode($ls->getAllCommentsFromUser($user_id));
+        exit();
+    }
+
     public function deleteUser() {
         $this->provjeraAdmina();
 
@@ -114,6 +123,22 @@ class AdminController extends BaseController {
             $user_id = $_POST['user_id'];
             $us = new UserService($this->registry->db);
             $us->deleteUser($user_id);
+            http_response_code(200);
+            exit();
+        } else {
+            http_response_code(405);
+            echo "Neispravan zahtjev.";
+            exit();
+        }
+    }
+
+    public function deleteReview() {
+        $this->provjeraAdmina();
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $user_id = $_POST['user_id'];
+            $book_id = $_POST['book_id'];
+            $ls = new LibraryService($this->registry->db);
+            $ls->deleteReview($user_id, $book_id);
             http_response_code(200);
             exit();
         } else {
