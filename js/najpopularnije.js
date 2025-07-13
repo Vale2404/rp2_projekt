@@ -1,5 +1,5 @@
 $(function() {
-    $('#najpopularnije').on('click', '.book-row', function(e) {
+    $('#najcitanije').on('click', '.book-row', function(e) {
         console.log('Kliknuto!');
         if ($(e.target).is('button, a, input, textarea')) return;
 

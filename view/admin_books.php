@@ -3,13 +3,13 @@
 <main>
 
     <section>
-        <h3>Dodaj novu knjigu</h3>
         <form id="add-book-form">
+            <h3>Dodaj novu knjigu</h3>
             <label>Autor: <input type="text" name="Autor" required></label><br>
             <label>Naziv: <input type="text" name="Naziv" required></label><br>
             <label>Žanr: <input type="text" name="Zanr"></label><br>
             <label>Slika naslovnice (URL ili putanja): <input type="text" name="slika_naslovnice"></label><br>
-            <label>Godina: <input type="number" name="Godina" min="0"></label><br>
+            <label>Godina: <input type="number" name="Godina"></label><br>
             <label>Opis: <textarea name="Opis"></textarea></label><br>
             <button type="submit">Dodaj knjigu</button>
         </form><br>
@@ -17,7 +17,7 @@
     </section><br>
 
     <section>
-    <h3>Popis knjiga</h3>
+    <h3 style="margin-left:5%">Popis knjiga</h3>
     <table id="books-table">
         <thead>
             <tr>
@@ -36,8 +36,9 @@
     </table>
     </section><br>
 </main>
+<?php require_once __SITE_PATH . '/view/_footer.php'; ?>
 
-    <script>
+<script>
     function ucitajKnjige() {
         $.getJSON('index.php?rt=admin/getAllBooksInJSON', function(knjige) {
             let rows = '';
@@ -204,6 +205,4 @@
             azurirajSljedeci();
         });
     });
-    </script>
-
-<?php require_once __SITE_PATH . '/view/_footer.php'; ?>
+</script>

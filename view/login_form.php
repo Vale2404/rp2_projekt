@@ -23,7 +23,9 @@
         <input type="submit" name="login" value="Ulogiraj se" class="login">
     </form>
     <br>
-    <a href="<?= __SITE_URL ?>/index.php?rt=register">Registrirajte se ovdje</a>
+    <form action="index.php?rt=register" method="post">
+        <button type="submit" class="cancel-btn">Registrirajte se ovdje</button>
+    </form>
 
 
 

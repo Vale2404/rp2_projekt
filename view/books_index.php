@@ -4,9 +4,10 @@
 <br><br>
 
 <div>
+    <span style="float:right; margin-bottom: 10px; margin-right:10%;">Broj rezultata pretrage: <?= count($lista_knjiga) ?> </span>
     <table id="knjige-tablica">
         <tr>
-            <th>Naslovnica</th>
+            <th></th>
             <th>Autor</th>
             <th>Naslov</th>
             <th></th>
@@ -29,11 +30,15 @@
                             <input type="hidden" name="book_id_readlist" value="<?= $knjiga->id ?>">
                             <button type="submit" class="add-readlist-btn">Dodaj na listu pročitanih</button>
                         </form>
-                    <?php elseif(in_array($knjiga->id, $_SESSION["wishlistIDs"])): ?>
-                        <span style="color: gray;">Već na listi želja</span>
-                    <?php elseif(in_array($knjiga->id, $_SESSION["readlistIDs"])): ?>
-                        <span style="color: gray;">Već na listi pročitanih</span>
-                    <?php endif; ?>
+                        <?php elseif(in_array($knjiga->id, $_SESSION["wishlistIDs"])): ?>
+                            <button type="button" disabled style="background: #eee; color: #888; border: 1px solid #ccc; cursor: not-allowed; padding: 7px 14px; border-radius: 8px;">
+                                Već na listi želja
+                            </button>
+                        <?php elseif(in_array($knjiga->id, $_SESSION["readlistIDs"])): ?>
+                            <button type="button" disabled style="background: #eee; color: #888; border: 1px solid #ccc; cursor: not-allowed; padding: 7px 14px; border-radius: 8px;">
+                                Već na listi pročitanih
+                            </button>
+                        <?php endif; ?>
                 </td>
             </tr>
         <?php endforeach; ?>

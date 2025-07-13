@@ -1,12 +1,13 @@
 <?php require_once __SITE_PATH . '/view/_header.php'; ?>
 
-<form action="index.php?rt=wishlist/downloadPdf" method="post" style="display:inline;">
-    <button type="submit">Preuzmi PDF popis knjiga za čitanje</button>
+<form action="index.php?rt=wishlist/downloadPdf" method="post">
+    <button type="submit" class="download-pdf-btn" style="float: left; margin-bottom: 10px; margin-left:5%;">Preuzmi PDF popis knjiga za pročitati</button>
+    <span style="float:right; margin-right:10%;">Ukupno knjiga za pročitati: <?= count($wishlist) ?> </span>
 </form>
 
 <table id="knjige-tablica">
     <tr>
-        <th>Naslovnica</th>
+        <th></th>
         <th>Autor</th>
         <th>Naslov</th>
         <th></th>

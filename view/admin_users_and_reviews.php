@@ -3,7 +3,7 @@
 <main>
 
     <section>
-        <h3>Popis korisnika</h3>
+        <h3 style="margin-left:5%">Popis korisnika</h3>
         <table id="users-table">
             <thead>
                 <tr>
@@ -22,6 +22,7 @@
     </section>
 
 </main>
+<?php require_once __SITE_PATH . '/view/_footer.php'; ?>
 
 <script>
     function ucitajKorisnike() {

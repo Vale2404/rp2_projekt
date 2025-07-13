@@ -15,7 +15,7 @@ class PopularController extends BaseController{
 
         $this->registry->template->topRated = $topRated;
         $this->registry->template->mostPopular = $mostPopular;
-        $this->registry->template->naslov = 'Top 5';
+        $this->registry->template->naslov = 'Top 5 naslova';
         $this->registry->template->show('popular_books');
     }
 }

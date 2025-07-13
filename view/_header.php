@@ -13,24 +13,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="js/index.js"></script>
-    <script src="<?= __SITE_URL ?>/js/najpopularnije.js?v=1"></script>
+    <script src="<?= __SITE_URL ?>/js/najcitanije.js?v=1"></script>
 
 </head>
 
 <body>
     <header>
         <div class="header-row">
+            <div></div>
             <h1>Knjigomat</h1>
-        <div class="user-info">
-            <form action="index.php" method="post" style="display: inline;">
-                <span class="user-greeting">Bok, <?= $_SESSION['username'] ?>!</span> <br>
-                <input type="submit" value="Odjavite se" name="btn_logout" class="logout">
-            </form>
-        </div>
+            <div class="user-info">
+                <form action="index.php" method="post" style="display: inline;">
+                    <span class="user-greeting">Bok, <?= $_SESSION['username'] ?>!</span> <br>
+                    <input type="submit" value="Odjavite se" name="btn_logout" class="logout">
+                </form>
+            </div>
         </div>
         <ul class="navbar">
             <li><a href="index.php?rt=search">Pretraga knjiga</a></li>
-            <li><a href="index.php?rt=popular">Najpopularnije knjige</a></li>
+            <li><a href="index.php?rt=popular">Top 5</a></li>
             <li><a href="index.php?rt=wishlist">Za pročitati</a></li>
             <li><a href="index.php?rt=readlist">Pročitano</a></li>
             <?php if(isset($_SESSION['jel_admin']) && $_SESSION['jel_admin'] == 1): ?>
@@ -47,7 +48,7 @@
 
     <main>
  <?php if (isset($naslov)): ?>
-    <div class="header-row">
-        <h1><?= htmlspecialchars($naslov) ?></h1>
+    <div class="subheader-row">
+        <h2><?= htmlspecialchars($naslov) ?></h2>
     </div>
 <?php endif; ?>

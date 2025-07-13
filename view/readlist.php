@@ -1,9 +1,10 @@
 <?php require_once __SITE_PATH . '/view/_header.php'; ?>
 
+<span style="float:right; margin-bottom: 10px; margin-right:10%;">Ukupno pročitano knjiga: <?= count($readlist) ?> </span>
 <table id="knjige-tablica">
     <tbody>
     <tr>
-        <th>Naslovnica</th>
+        <th></th>
         <th>Autor</th>
         <th>Naslov</th>
     </tr>
