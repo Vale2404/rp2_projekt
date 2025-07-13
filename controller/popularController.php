@@ -11,11 +11,11 @@ class PopularController extends BaseController{
 
     public function index() {
         $topRated = $this->library->getTopRatedBooks(5);
-        $mostPopular = $this->library->getMostPopularBooks(5);
+        $mostPopular = $this->library->getMostReadBooks(5);
 
         $this->registry->template->topRated = $topRated;
         $this->registry->template->mostPopular = $mostPopular;
-        $this->registry->template->naslov = 'Najpopularnije knjige';
+        $this->registry->template->naslov = 'Top 5';
         $this->registry->template->show('popular_books');
     }
 }

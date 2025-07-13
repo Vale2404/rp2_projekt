@@ -189,19 +189,19 @@ class LibraryService {
         return $st->fetchAll();
     }
 
-    public function getMostPopularBooks($broj) {
-        $st = $this->db->prepare(
-            'SELECT k.*, 
-                (SELECT COUNT(*) FROM Zelje z WHERE z.ID_Knjige = k.ID) +
-                (SELECT COUNT(*) FROM Procitane p WHERE p.ID_Knjige = k.ID) AS popularnost
-            FROM Knjige k
-            ORDER BY popularnost DESC
-            LIMIT :broj'
-        );
-        $st->bindValue(':broj', $broj, PDO::PARAM_INT);
-        $st->execute();
-        return $st->fetchAll();
-    }
+public function getMostReadBooks($broj) {
+    $st = $this->db->prepare(
+        'SELECT k.*, COUNT(p.ID_Knjige) AS broj_citanja
+         FROM Knjige k
+         LEFT JOIN Procitane p ON p.ID_Knjige = k.ID
+         GROUP BY k.ID
+         ORDER BY broj_citanja DESC
+         LIMIT :broj'
+    );
+    $st->bindValue(':broj', $broj, PDO::PARAM_INT);
+    $st->execute();
+    return $st->fetchAll();
+}
 
     public function getAllCommentsFromUser($user_id) {
         try {

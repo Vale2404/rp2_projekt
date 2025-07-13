@@ -1,16 +1,23 @@
 <?php require_once __SITE_PATH . '/view/_header.php'; ?>
 
-<h2>Top 5 najbolje ocijenjenih knjiga</h2>
+<h2>Najbolje ocijenjene</h2>
 <table id="knjige-tablica">
     <tbody>
     <tr>
+        <th></th>
         <th>Naslovnica</th>
         <th>Autor</th>
         <th>Naslov</th>
         <th>Prosječna ocjena</th>
     </tr>
-    <?php foreach ($topRated as $book): ?>
+    <?php
+    $it = 0;
+    foreach ($topRated as $book): 
+        $it++;?>
         <tr  class="book-row" data-href="?rt=bookDetails&temp_book_id=<?= urlencode($book['ID']) ?>">
+            <td>
+                <span class="rank-badge"><?=$it?>.</span>
+            </td>
             <td>
                 <img src="images/<?= htmlspecialchars($book['Slika_naslovnice']) ?>" alt="Naslovnica" class="cover-img">
             </td>
@@ -28,16 +35,24 @@
     <tbody>
 </table>
 
-<h2>Top 5 najpopularnijih knjiga</h2>
+<h2>Najčitanije</h2>
 <table id="knjige-tablica">
     <tbody>
     <tr>
+        <th></th>
         <th>Naslovnica</th>
         <th>Autor</th>
         <th>Naslov</th>
+        <th>Broj čitanja</th>
     </tr>
-    <?php foreach ($mostPopular as $book): ?>
+    <?php
+    $it = 0;
+    foreach ($mostPopular as $book): 
+        $it++;?>
         <tr class="book-row" data-href="?rt=bookDetails&temp_book_id=<?= urlencode($book['ID']) ?>">
+            <td>
+                <span class="rank-badge"><?=$it?>.</span>
+            </td>
             <td>
                 <img src="images/<?= htmlspecialchars($book['Slika_naslovnice']) ?>" alt="Naslovnica" class="cover-img">
             </td>
@@ -46,6 +61,9 @@
             </td>
             <td>
                 <?= htmlspecialchars($book['Naziv']) ?>
+            </td>
+            <td>
+                <?= $book['broj_citanja'] ?>
             </td>
         </tr>
     <?php endforeach; ?>
