@@ -41,6 +41,25 @@
             <?php endif; ?>
         </td>
         </tr>
+        <tr>
+            <td class="book-label">Dodaj u listu</td>
+            <td class="book-value">
+                <?php if(!in_array($knjiga->id, $wishlist_ids) && !in_array($knjiga->id, $readlist_ids)): ?>
+                    <form method="post" action="index.php?rt=wishlist/add" style="display: inline;">
+                        <input type="hidden" name="book_id_wishlist" value="<?= $knjiga->id ?>">
+                        <button type="submit" class="add-wishlist-btn">Lista želja</button>
+                    </form>
+                    <form method="post" action="index.php?rt=readlist/add" style="display: inline;">
+                        <input type="hidden" name="book_id_readlist" value="<?= $knjiga->id ?>">
+                        <button type="submit" class="add-readlist-btn">Pročitano</button>
+                    </form>
+                <?php elseif(in_array($knjiga->id, $wishlist_ids)): ?>
+                    <span style="color: gray;">Već na listi želja</span>
+                <?php elseif(in_array($knjiga->id, $readlist_ids)): ?>
+                    <span style="color: gray;">Već na listi pročitanih</span>
+                <?php endif; ?>
+            </td>
+        </tr>
     </table>
     
 
@@ -54,7 +73,7 @@
     <form action="<?= __SITE_URL ?>/index.php?rt=bookDetails/recenziraj" method="post">
         <input type="hidden" name="book_id" value="<?= htmlspecialchars($knjiga->id) ?>">
 
-        <label for="ocjena">Ocjena:</label><br>
+        <label>Ocjena:</label><br>
         <div class="star-rating">
             <?php for ($i = 5; $i >= 1; $i--): ?>
                 <input type="radio" id="star<?= $i ?>" name="ocjena" value="<?= $i ?>" required>

@@ -28,11 +28,11 @@
                 <?= htmlspecialchars($book['Naziv']) ?>
             </td>
             <td>
-                <?= number_format($book['prosjek'], 2) ?>/5
+                <?= number_format($book['prosjek'], 2) ?>/5.00
             </td>
         </tr>
     <?php endforeach; ?>
-    <tbody>
+    </tbody>
 </table>
 
 <h2>Najčitanije</h2>
@@ -67,7 +67,7 @@
             </td>
         </tr>
     <?php endforeach; ?>
-    <tbody>
+    </tbody>
 </table>
 
 <?php require_once __SITE_PATH . '/view/_footer.php'; ?>
