@@ -36,7 +36,7 @@
 </table>
 
 <h2>Najčitanije</h2>
-<table id="knjige-tablica">
+<table id="najpopularnije">
     <tbody>
     <tr>
         <th></th>
