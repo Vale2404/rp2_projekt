@@ -1,5 +1,9 @@
 <?php require_once __SITE_PATH . '/view/_header.php'; ?>
 
+<form action="index.php?rt=wishlist/downloadPdf" method="post" style="display:inline;">
+    <button type="submit">Preuzmi PDF popis knjiga za čitanje</button>
+</form>
+
 <table id="knjige-tablica">
     <tr>
         <th>Naslovnica</th>

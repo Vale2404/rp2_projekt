@@ -19,10 +19,12 @@
     <header>
         <div class="header-row">
             <h1>Knjigomat</h1>
-            <form action="index.php" method="post">
+        <div class="user-info">
+            <form action="index.php" method="post" style="display: inline;">
                 <span class="user-greeting">Bok, <?= $_SESSION['username'] ?>!</span> <br>
                 <input type="submit" value="Odjavite se" name="btn_logout" class="logout">
             </form>
+        </div>
         </div>
         <ul class="navbar">
             <li><a href="index.php?rt=search">Pretraga knjiga</a></li>

@@ -725,3 +725,37 @@ div.book-details-page * {
     display: flex;
     justify-content: center;
 }
+
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.user-greeting {
+    margin-right: 10px;
+}
+
+
+.rank-badge {
+    display: inline-block;
+    min-width: 30px;
+    height: 30px;
+    line-height: 30px;
+    background:  #3761a8;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 1.18em;
+    text-align: center;
+    font-weight: bold;
+    font-style: italic;
+    margin-right: 4px;
+    box-shadow: 0 2px 7px rgba(0,0,0,0.06);
+    vertical-align: middle;
+}

@@ -12,14 +12,53 @@ class WishlistController extends BaseController {
 
         $wishlist = $ls->getWishList($user_id);
 
-
 		$this->registry->template->naslov = 'Popis knjiga za pročitati';
 		$this->registry->template->wishlist = $wishlist;
 
         $this->registry->template->show('wishlist');
     }
 
-     //Dodaj knjigu na listu želja
+    public function downloadPdf() {
+        $ls = new LibraryService($this->registry->db);
+
+        $printList = $ls->getWishList($_SESSION['user_id']);
+
+        require_once __DIR__ . '/../vendor/autoload.php'; // Putanja do composer autoloadera ako koristiš dompdf
+        $dompdf = new Dompdf\Dompdf();
+
+        // Pripremi HTML sadržaj
+        ob_start();
+        ?>
+        <!DOCTYPE html>
+        <html lang="hr">
+        <head>
+            <meta charset="UTF-8">
+            <style>
+                body { font-family: DejaVu Sans, sans-serif; }
+            </style>
+        </head>
+        <body>
+            <h2>Popis knjiga za čitanje</h2>
+            <ul>
+            <?php foreach($printList as $knjiga): ?>
+                <li><?= htmlspecialchars($knjiga->naziv) ?> — <?= htmlspecialchars($knjiga->autor) ?></li>
+            <?php endforeach; ?>
+            </ul>
+        </body>
+        </html>
+        <?php
+        $html = ob_get_clean();
+
+        $dompdf->loadHtml($html, 'UTF-8');
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        // Isporuči kao download
+        $dompdf->stream("procitane_knjige.pdf", ["Attachment" => true]);
+        exit();
+    }
+
+    //Dodaj knjigu na listu želja
     public function add() {
         if(!isset($_SESSION['user_id'])) {
             header('Location: index.php?rt=login');
