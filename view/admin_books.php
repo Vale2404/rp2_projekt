@@ -50,7 +50,11 @@
                     <td><img src="images/${knjiga.Slika_naslovnice}" alt="Naslovnica" class="cover-img"></td>
                     <td>${knjiga.Godina ? knjiga.Godina : ''}</td>
                     <td>${knjiga.Opis}</td>
-                    <td>${knjiga.Prosjecna_ocjena == 0 ? 'Knjiga još nije ocjenjena.' : knjiga.Prosjecna_ocjena}</td>
+                    <td>${
+                        knjiga.Prosjecna_ocjena === null
+                            ? 'Knjiga još nije ocijenjena.'
+                            : parseFloat(knjiga.Prosjecna_ocjena).toFixed(2) + ' / 5.00'
+                        }</td>
                     <td>
                         <button class="edit-btn">Uredi</button>
                         <button class="delete-btn">Obriši!</button>

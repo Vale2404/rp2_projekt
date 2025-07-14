@@ -59,11 +59,22 @@ class ReviewModel {
             FROM Recenzije
             WHERE ID_Knjige = :id
         ');
-
         $st->execute(['id' => $book_id]);
         $row = $st->fetch();
-        return $row['prosjek'] ?? 0;
+        $prosjek = $row['prosjek'] ?? null;
+
+        $update = $this->db->prepare('
+            UPDATE Knjige SET Prosjecna_ocjena = :prosjek WHERE ID = :id
+        ');
+        $update->execute([
+            'prosjek' => $prosjek !== null ? number_format($prosjek, 2, '.', '') : null,
+            'id' => $book_id
+        ]);
+
+
+        return $prosjek;
     }
+
 
     public function osvjeziSveProsjecneOcjene() {
         $st = $this->db->query('SELECT ID FROM Knjige');

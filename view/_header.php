@@ -34,6 +34,7 @@
             <li><a href="index.php?rt=popular">Top 5</a></li>
             <li><a href="index.php?rt=wishlist">Za pročitati</a></li>
             <li><a href="index.php?rt=readlist">Pročitano</a></li>
+            <li><a href="index.php?rt=myreviews">Moje recenzije</a></li>
             <?php if(isset($_SESSION['jel_admin']) && $_SESSION['jel_admin'] == 1): ?>
                 <li class="dropdown">
                     <a href="#">Administracija &#9662;</a>

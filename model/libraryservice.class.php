@@ -246,6 +246,24 @@ class LibraryService {
         }
     }
 
+    public function getAllReadButNotReviewedBooks($user_id) {
+        try {
+            $st = $this->db->prepare(
+                'SELECT k.ID, k.Naziv, k.Autor
+                FROM Knjige k
+                JOIN Procitane p ON p.ID_Knjige = k.ID
+                WHERE p.ID_Korisnika = :id1
+                AND k.ID NOT IN (
+                    SELECT r.ID_Knjige FROM Recenzije r WHERE r.ID_Korisnika = :id2
+                )'
+            );
+            $st->execute(['id1' => $user_id, 'id2' => $user_id]);
+        } catch(PDOException $e) {
+            exit('PDO error ' . $e->getMessage());
+        }
+        return $st->fetchAll();
+    }
+
     function getBySearchAndFilter( $search = '', $sort = '', $genre = []) {
         $query = 'SELECT * FROM `Knjige`';
         if($search !== '' || !empty($genre))

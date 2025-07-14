@@ -763,7 +763,7 @@ div.book-details-page * {
     border-collapse: collapse;
     width: 95%;
     margin: 10px auto;
-    background: #e9d9d9;
+    background: #ffffff;
     font-size: 0.97em;
 }
 .comments-table th, .comments-table td {
@@ -783,6 +783,35 @@ div.book-details-page * {
 .comments-table td.akcija {
     display: flex;
     justify-content: center;
+}
+
+.reviews-table {
+    border-collapse: collapse;
+    width: 95%;
+    margin: 10px auto;
+    background: #ffffff;
+    font-size: 0.97em;
+}
+.reviews-table th, .reviews-table td {
+    border: 1px solid #d3d3d3;
+    padding: 8px 12px;
+    text-align: center;
+}
+.reviews-table th {
+    background-color: #f2f2f2;
+    font-weight: 600;
+    color: #31708f;
+}
+.reviews-table tbody tr:nth-child(even) {
+    background-color: #f3f3f3;
+}
+.reviews-table td.akcija {
+    display: flex;
+    justify-content: center;
+}
+.reviews-table tbody tr:hover {
+    background-color: #e1e1e1;
+    transition: background 0.15s;
 }
 /*
 .cancel-btn:hover {
@@ -992,4 +1021,19 @@ body {
 
 .selected-user {
     background-color: #f1e9c7 !important;
+}
+
+.recenzija {
+    background: #f9f6f6;
+    border: 1px solid #e7caca;
+    color: #a26c6c;
+    font-size: 1.15em;
+    font-style: italic;
+    text-align: center;
+    margin: 25px auto 15px auto;
+    padding: 16px 22px;
+    width: 60%;
+    border-radius: 7px;
+    box-shadow: 0 1px 5px #eee;
+    letter-spacing: 0.03em;
 }
