@@ -54,10 +54,10 @@
             let $row = $(this).closest('tr');
             let id = $(this).closest('tr').data('id');
             let username = $row.find('td').eq(2).text();
-            if(!confirm(`Jeste li sigurni da želite obrisati korisnika "${username}"? Ovo će obrisati i sve njegove recenzije.`))
+            if(!confirm(`Jeste li sigurni da želite obrisati korisnika "${username}"?`))
                 return;
             $.post('index.php?rt=admin/deleteUser', {user_id: id}, function(){
-                $('#users-msg').removeClass().addClass('success show').text("Obrisan korisnik i sve njegove recenzije.");
+                $('#users-msg').removeClass().addClass('success show').text("Korisnik uspješno obrisan.");
                 setTimeout(() => { $('#users-msg').removeClass('show'); }, 2000);
                 ucitajKorisnike();
             }).fail(function() {
@@ -69,9 +69,13 @@
         $('#users-table').on('click', '.show-comments-btn', function(){
             let $row = $(this).closest('tr');
             let $commentRow = $row.next('.komentar-row');
+            let $gumb = $(this);
+            $('#users-table tr.selected-user').removeClass('selected-user');
 
             if ($commentRow.length) {
                 $commentRow.remove();
+                $gumb.text('Prikaži komentare');
+                $row.removeClass('selected-user');
                 return;
             }
 
@@ -90,7 +94,7 @@
                         <tbody>
                             ${komentari.map(k => `
                                 <tr>
-                                    <td>${k.ID_Knjige}</td>
+                                    <td>${k.Naziv}</td>
                                     <td>${k.Komentar}</td>
                                     <td>${k.Ocjena}</td>
                                     <td class="akcija">
@@ -104,6 +108,8 @@
                     </table>`
                 : '<i>Nema komentara.</i>';
                 $row.after(`<tr class="komentar-row"><td colspan="6">${komentariHtml}</td></tr>`);
+                $gumb.text('Sakrij komentare');
+                $row.addClass('selected-user');
             });
         });
 

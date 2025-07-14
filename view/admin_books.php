@@ -50,7 +50,7 @@
                     <td><img src="images/${knjiga.Slika_naslovnice}" alt="Naslovnica" class="cover-img"></td>
                     <td>${knjiga.Godina ? knjiga.Godina : ''}</td>
                     <td>${knjiga.Opis}</td>
-                    <td>${knjiga.Prosjecna_ocjena}</td>
+                    <td>${knjiga.Prosjecna_ocjena == 0 ? 'Knjiga još nije ocjenjena.' : knjiga.Prosjecna_ocjena}</td>
                     <td>
                         <button class="edit-btn">Uredi</button>
                         <button class="delete-btn">Obriši!</button>
@@ -70,7 +70,7 @@
             if(!confirm(`Jeste li sigurni da želite obrisati knjigu "${naziv}" autora ${autor}?`))
                 return;
             let id = $(this).closest('tr').data('id');
-            $.post('index.php?rt=admin/deleteBook', {id: id}, function(){
+            $.post('index.php?rt=admin/deleteBook', {book_id: id}, function(){
                 $('#add-book-msg').removeClass('show success error').text('');
                 $('#add-book-msg')
                     .addClass('success show')

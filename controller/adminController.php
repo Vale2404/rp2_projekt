@@ -79,7 +79,7 @@ class AdminController extends BaseController {
         $this->provjeraAdmina();
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $id = intval($_POST['id']);
+            $id = intval($_POST['book_id']);
             $ls = new LibraryService($this->registry->db);
             $ls->deleteBook($id);
             http_response_code(200);
@@ -211,6 +211,16 @@ class AdminController extends BaseController {
         echo $msg;
         exit();
     }
+
+    public function refreshAllBookAverages() {
+        $this->provjeraAdmina();
+        require_once __SITE_PATH . '/model/review.model.php';
+        $rm = new ReviewModel($this->registry->db);
+        $rm->osvjeziSveProsjecneOcjene();
+        echo "Sve prosječne ocjene su osvježene.";
+        exit();
+    }
+
 }
 
 ?>
