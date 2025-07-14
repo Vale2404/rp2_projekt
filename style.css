@@ -924,7 +924,6 @@ div.book-details-page * {
     padding-right: 36px;  /* još malo ekstra na zadnjem stupcu */
 }
 
-
 .tablica-blok table tr td:last-child {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -933,8 +932,60 @@ div.book-details-page * {
     border-top-right-radius: 10px;
 }
 
-
 .tablica-blok table td, 
 .tablica-blok table th {
     word-break: break-word;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+.login-wrapper {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.login-form {
+    background: #fff;
+    padding: 28px 28px 18px 28px;
+    border-radius: 18px;
+    box-shadow: 0 6px 24px rgba(60, 80, 140, 0.10);
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+}
+.login-form label {
+    font-size: 1.2rem;
+    color: #3d5170;
+}
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    padding: 9px 13px;
+    border: 1.2px solid #bfc9d1;
+    border-radius: 8px;
+    background: #f4f8fb;
+    font-size: 1.07rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.login-form input[type="text"]:focus,
+.login-form input[type="password"]:focus {
+    border-color: #6078ea;
+    box-shadow: 0 0 0 2px #dbe6fc;
+}
+
+.register-box {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.07rem;
+    color: #3d5170;
 }
