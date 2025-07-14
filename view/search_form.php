@@ -1,4 +1,4 @@
-<form class="form-search-wide" action="index.php?rt=search/searchAndFilter" method="post">
+<form class="form-search-wide" action="index.php?rt=search" method="post">
     <h4>Filtriraj i sortiraj naslove</h4>
     <div class="fsw-row">
         <input type="text" name="searchText" id="searchText"
@@ -12,7 +12,7 @@
         </select>
     </div>
     <div class="checkboxes-row">
-        <span class="checkbox-title">Uključeni žanrovi:</span>
+        <span class="checkbox-title">Filtriranje po žanrovima:</span>
             <?php foreach ($allGenres as $zanr): ?>
                 <label>
                     <?= htmlspecialchars($zanr) ?>

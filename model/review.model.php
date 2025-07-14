@@ -54,14 +54,33 @@ class ReviewModel {
     }
 
     public function izracunajProsjecnuOcjenu($book_id) {
-    $st = $this->db->prepare('SELECT AVG(Ocjena) AS prosjek FROM Recenzije WHERE ID_Knjige = :id');
-    $st->execute(['id' => $book_id]);
-    $row = $st->fetch();
-    return $row['prosjek'] ?? 0;
-}
+        $st = $this->db->prepare('
+            SELECT ROUND(AVG(Ocjena), 2) AS prosjek
+            FROM Recenzije
+            WHERE ID_Knjige = :id
+        ');
 
+        $st->execute(['id' => $book_id]);
+        $row = $st->fetch();
+        return $row['prosjek'] ?? 0;
+    }
 
+    public function osvjeziSveProsjecneOcjene() {
+        $st = $this->db->query('SELECT ID FROM Knjige');
+        $book_ids = $st->fetchAll(PDO::FETCH_COLUMN);
 
+        foreach ($book_ids as $id) {
+            $prosjek = $this->izracunajProsjecnuOcjenu($id);
+
+            $update = $this->db->prepare('
+                UPDATE Knjige SET Prosjecna_ocjena = :prosjek WHERE ID = :id
+            ');
+            $update->execute([
+                'prosjek' => $prosjek !== null ? number_format($prosjek, 2, '.', '') : null,
+                'id' => $id
+            ]);
+        }
+    }
 
 }
 ?>

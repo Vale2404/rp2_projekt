@@ -13,7 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="js/index.js"></script>
-    <script src="<?= __SITE_URL ?>/js/najcitanije.js?v=1"></script>
+    <script src="<?= __SITE_URL ?>/js/najpopularnije.js?v=1"></script>
 
 </head>
 
