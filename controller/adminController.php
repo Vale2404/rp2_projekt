@@ -211,6 +211,16 @@ class AdminController extends BaseController {
         echo $msg;
         exit();
     }
+
+    public function refreshAllBookAverages() {
+        $this->provjeraAdmina();
+        require_once __SITE_PATH . '/model/review.model.php';
+        $rm = new ReviewModel($this->registry->db);
+        $rm->osvjeziSveProsjecneOcjene();
+        echo "Sve prosječne ocjene su osvježene.";
+        exit();
+    }
+
 }
 
 ?>
