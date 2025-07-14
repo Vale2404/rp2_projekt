@@ -8,7 +8,6 @@
             <option value="Naziv" <?= ($_SESSION['sortOption'] ?? '') === "Naziv" ? 'selected' : '' ?>>Nazivu djela</option>
             <option value="Autor" <?= ($_SESSION['sortOption'] ?? '') === "Autor" ? 'selected' : '' ?>>Imenu autora</option>
             <option value="Godina" <?= ($_SESSION['sortOption'] ?? '') === "Godina" ? 'selected' : '' ?>>Godini izdanja</option>
-            <option value="Prosjecna_ocjena" <?= ($_SESSION['sortOption'] ?? '') === "Prosjecna_ocjena" ? 'selected' : '' ?>>Prosječnoj ocjeni</option>
         </select>
     </div>
     <div class="checkboxes-row">

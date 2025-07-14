@@ -1,7 +1,9 @@
 <?php require_once __SITE_PATH . '/view/_header.php'; ?>
 
 <form action="index.php?rt=wishlist/downloadPdf" method="post">
-    <button type="submit" class="download-pdf-btn" style="float: left; margin-bottom: 10px; margin-left:5%;">Preuzmi PDF popis knjiga za pročitati</button>
+    <?php if (count($wishlist) > 0): ?>
+        <button type="submit" class="download-pdf-btn" style="float: left; margin-bottom: 10px; margin-left:5%;">Preuzmi PDF popis knjiga za pročitati</button>
+    <?php endif; ?>
     <span style="float:right; margin-right:10%;">Ukupno knjiga za pročitati: <?= count($wishlist) ?> </span>
 </form>
 
