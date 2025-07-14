@@ -10,7 +10,12 @@ class LibraryService {
 
     public function getAllBooks() {
         try {
-			$st = $this->db->prepare('SELECT * FROM Knjige');
+			$st = $this->db->prepare(
+                'SELECT k.*, AVG(r.Ocjena) AS Prosjecna_ocjena
+                FROM Knjige k
+                LEFT JOIN Recenzije r ON k.ID = r.ID_Knjige
+                GROUP BY k.ID'
+            );
 			$st->execute();
         } catch(PDOException $e) {
             exit('PDO error ' . $e->getMessage());
@@ -25,7 +30,7 @@ class LibraryService {
                 $row['Slika_naslovnice'], 
                 $row['Godina'],
                 $row['Opis'],
-                $row['Prosjecna_ocjena']
+                $row['Prosjecna_ocjena']  //Ovo je rezultat izracuna a ne stupac u tablici
             );
         }
 		return $arr;
