@@ -302,21 +302,22 @@ footer {
     margin-bottom: 30px;
 }
 
-.book-table {
-    width: 100%;
-    border-collapse: collapse;
+div.book-details-page .book-table {
+  font-size: 11px !important;
+  line-height: 1.4 !important;
 }
 
 .book-label {
-    font-weight: bold;
-    padding-right: 20px;
-    vertical-align: top;
-    width: 80px; /* manja širina lijevog stupca */
+  font-weight: bold;
+  padding: 6px 12px;
+  width: 30%;
 }
 
 .book-value {
-    word-break: break-word;
+  padding: 6px 12px;
+  color: #333;
 }
+
 .star-rating {
     direction: rtl;
     display: inline-flex;
@@ -336,7 +337,7 @@ footer {
 .star-rating input[type="radio"]:checked ~ label,
 .star-rating label:hover,
 .star-rating label:hover ~ label {
-    color: green;
+    color: #2C3E50;
 }
 div.book-details-page,
 div.book-details-page * {
@@ -479,7 +480,8 @@ div.book-details-page * {
 .edit-btn,
 .login,
 .register,
-.back_to_login {
+.back_to_login,
+.posalji_recenziju {
     background: #f0f8ff;
     color: #3761a8;
     border: none;
@@ -505,7 +507,8 @@ div.book-details-page * {
 .edit-btn:hover,
 .login:hover,
 .register:hover,
-.back_to_login:hover {
+.back_to_login:hover,
+.posalji_recenziju:hover {
     background: #ddeafd;
     color: #13345d;
 }
@@ -1037,3 +1040,61 @@ body {
     box-shadow: 0 1px 5px #eee;
     letter-spacing: 0.03em;
 }
+
+.book-details-page h2 {
+  font-size: 25px !important;
+  margin-top: 40px;
+  margin-bottom: 12px;
+  color: #2c3e50;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 6px;
+}
+
+.book-details-page h3 {
+  font-size: 15px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  color: #34495e;
+}
+.recenzije {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  margin-right: 40px;
+}
+
+.recenzije li {
+  background: #edf2f8;
+  border: 1px solid #dde;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+}
+
+.recenzije strong {
+  font-weight: 600;
+  color: #2e4865;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.recenzije li span,
+.recenzije li p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #444;
+}
+.no-recenzije {
+  background: #f9f9f9;
+  border: 1px dashed #bbb;
+  padding: 12px 18px;
+  margin: 20px auto 40px auto; 
+  border-radius: 8px;
+  font-style: italic;
+  color: #555;
+  text-align: center;
+  font-size: 14px;
+  max-width: 500px;
+}
+

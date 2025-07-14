@@ -1,5 +1,5 @@
 <?php require_once __SITE_PATH . '/view/_header.php'; ?>
-<div class="book-details-page">
+<div class="book-details-page" style="margin-left: 40px;">
 <div style="display: flex; align-items: flex-start; gap: 30px; margin-bottom: 30px;">
 
     <!-- Slika knjige -->
@@ -31,13 +31,27 @@
             <?php if ($prosjek_ocjena == 0): ?>
                 <em>Ova knjiga još nije ocijenjena.</em>
             <?php else: ?>
-                <?= $prosjek_ocjena ?>/5
+               <?= number_format($prosjek_ocjena, 2) ?>/5.00
                 <?php
-                    $rounded = round($prosjek_ocjena);
+                    $punih = floor($prosjek_ocjena);
+                    $decimalni = $prosjek_ocjena - $punih;
+
                     for ($i = 1; $i <= 5; $i++) {
-                        echo $i <= $rounded ? '★' : '☆';
+                        if ($i <= $punih) {
+                            echo '★';
+                        } elseif ($i == $punih + 1) {
+                            if ($decimalni >= 0.75) {
+                                echo '★';
+                            } elseif ($decimalni >= 0.25) {
+                                echo '⯨';
+                            } else {
+                                echo '☆'; 
+                            }
+                        } else {
+                            echo '☆';
+                        }
                     }
-                ?>
+                    ?>
             <?php endif; ?>
         </td>
         </tr>
@@ -66,7 +80,7 @@
 
 </div>
 
-<h3>Recenzije</h3>
+<h2>Recenzije</h2>
 
 <?php if ($moze_recenzirati): ?>
     <h3>Dodaj svoju recenziju</h3>
@@ -85,21 +99,32 @@
         <label for="komentar">Komentar:</label><br>
         <textarea name="komentar" id="komentar" rows="4" cols="50" required></textarea><br><br>
 
-        <input type="submit" value="Pošalji recenziju">
+        <input type="submit" class ="posalji_recenziju" value="Pošalji recenziju">
     </form>
     <?php else: ?>
         <p><em>Već ste recenzirali ovu knjigu ili niste prijavljeni.</em></p>
  <?php endif; ?>
 
 <?php if (empty($recenzije)): ?>
-    <p>Još nema recenzija za ovu knjigu.</p>
+    <div class="no-recenzije">
+        <em>Ova knjiga trenutno nema recenzija.</em>
+    </div>
+
 <?php else: ?>
     <ul class="recenzije">
         <?php foreach ($recenzije as $r): ?>
             <li>
                 <strong>Korisnik <?= htmlspecialchars($r->username) ?></strong> 
                 <br>
-                Ocjena: <?= htmlspecialchars($r->ocjena) ?>/5<br>
+                <?php
+                    $ocjena = (int)$r->ocjena;
+                    echo "Ocjena: {$ocjena}/5<br>";
+
+                    for ($i = 1; $i <= 5; $i++) {
+                        echo $i <= $ocjena ? '★' : '☆';
+                    }
+                    echo "<br>";
+                ?>
                 Komentar: <?= nl2br(htmlspecialchars($r->komentar)) ?>
             </li>
         <?php endforeach; ?>

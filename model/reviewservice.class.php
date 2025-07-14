@@ -1,6 +1,6 @@
 <?php
 
-class ReviewModel {
+class ReviewService {
     private $db;
 
     public function __construct($db) {

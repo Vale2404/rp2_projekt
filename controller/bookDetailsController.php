@@ -12,8 +12,8 @@ class BookDetailsController extends BaseController {
         $this->registry->template->naslov = $tempKnjiga->naziv;
 
         // Dohvati recenzije
-        require_once __SITE_PATH . '/model/review.model.php';
-        $reviewModel = new ReviewModel($this->registry->db);
+        require_once __SITE_PATH . '/model/reviewservice.class.php';
+        $reviewModel = new ReviewService($this->registry->db);
         $recenzije = $reviewModel->getReviews($book_id);
         $this->registry->template->recenzije = $recenzije;
         $prosjek = $reviewModel->izracunajProsjecnuOcjenu($book_id);
@@ -28,8 +28,8 @@ class BookDetailsController extends BaseController {
             $userModel = new UserService($this->registry->db);
             $user = $userModel->getUserByUsername($korisnik);
 
-            require_once __SITE_PATH . '/model/review.model.php';
-            $reviewModel = new ReviewModel($this->registry->db);
+            require_once __SITE_PATH . '/model/reviewservice.class.php';
+            $reviewModel = new ReviewService($this->registry->db);
             $moze_recenzirati = !$reviewModel->jeliRecenzirao($user->id, $book_id);
         }
 
@@ -78,8 +78,8 @@ class BookDetailsController extends BaseController {
         $userModel = new UserService($this->registry->db);
         $user = $userModel->getUserByUsername($korisnik);
 
-        require_once __SITE_PATH . '/model/review.model.php';
-        $reviewModel = new ReviewModel($this->registry->db);
+        require_once __SITE_PATH . '/model/reviewservice.class.php';
+        $reviewModel = new ReviewService($this->registry->db);
 
         if ($reviewModel->jeliRecenzirao($user->id, $book_id)) {
             header('Location: ' . __SITE_URL . '/index.php?rt=bookDetails&temp_book_id=' . $book_id);
