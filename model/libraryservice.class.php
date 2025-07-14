@@ -232,7 +232,7 @@ public function getMostReadBooks($broj) {
     }
 
     function getBySearchAndFilter( $search = '', $sort = '', $genre = []) {
-        $query = 'SELECT `ID` FROM `Knjige`';
+        $query = 'SELECT * FROM `Knjige`';
         if($search !== '' || !empty($genre))
             $query .= ' WHERE ';
         if ($search !== '') {
@@ -255,12 +255,20 @@ public function getMostReadBooks($broj) {
         }
         $st->execute();
 
-        $indexi = [];
-        while ($row = $st->fetch()) {
-            $indexi[] = (int) $row['ID'];
+        $arr = array();
+        while($row = $st->fetch()) {
+            $arr[] = new Book(
+                $row['ID'],
+                $row['Autor'],
+                $row['Naziv'],
+                $row['Zanr'],
+                $row['Slika_naslovnice'], 
+                $row['Godina'],
+                $row['Opis'],
+                $row['Prosjecna_ocjena']
+            );
         }
-
-        return $indexi;
+        return $arr;
     }
     
     function getAllGenres() {

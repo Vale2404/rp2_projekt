@@ -42,3 +42,7 @@ $(function() {
         }, 1500); // 350ms debounce
     });
 });
+
+$('#sortOption').on('select2:clear', function(e) {
+    $(this.form).submit();
+});

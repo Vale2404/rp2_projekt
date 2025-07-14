@@ -5,8 +5,11 @@ class SearchController extends BaseController {
     public function index() {
         $ls = new LibraryService($this->registry->db);
 
-		// Popuni template potrebnim podacima
-		$this->registry->template->lista_knjiga = $ls->getAllBooks();
+        if (isset($_POST['searchText']))    $_SESSION['searchText'] = $_POST['searchText'];
+        $_SESSION['sortOption'] = $_POST['sortOption'] ?? "";
+        if (isset($_POST['checkedGenres']))    $_SESSION['checkedGenres'] = $_POST['checkedGenres'];
+        $this->registry->template->lista_knjiga = $ls->getBySearchAndFilter($_SESSION['searchText'] ?? "", $_SESSION['sortOption'] ?? "", $_SESSION['checkedGenres'] ?? "");
+        $this->registry->template->allGenres = $ls->getAllGenres();
 
         $_SESSION["wishlistIDs"] = [];
         if(isset($_SESSION['user_id'])) {
@@ -24,30 +27,8 @@ class SearchController extends BaseController {
             }
         }
 
-        $this->registry->template->allGenres = $ls->getAllGenres();
-		$this->registry->template->naslov = 'Pregled svih knjiga';
+		$this->registry->template->naslov = 'Pretraga knjiga';
         $this->registry->template->show('books_index');
-    }
-
-    public function searchAndFilter()
-    {
-        $_SESSION['searchText'] = $_POST['searchText'] ?? "";
-        $_SESSION['sortOption'] = $_POST['sortOption'] ?? "";
-        $_SESSION['checkedGenres'] = $_POST['checkedGenres'] ?? [];
-
-        $ls = new LibraryService($this->registry->db);
-        $indexiFiltriranih = $ls->getBySearchAndFilter($_SESSION['searchText'], $_SESSION['sortOption'], $_SESSION['checkedGenres']);
-
-        $filtriraneKnjige = [];
-        foreach ($indexiFiltriranih as $i) {
-            $knjiga = $ls->getBook($i);
-            $filtriraneKnjige[] = $knjiga;
-        }
-
-        $this->registry->template->lista_knjiga = $filtriraneKnjige;
-        $this->registry->template->allGenres = $ls->getAllGenres();
-        $this->registry->template->naslov = 'Pregled knjiga - filtrirano';
-        $this->registry->template->show('books_index');        
     }
 
     public function resetSearch()

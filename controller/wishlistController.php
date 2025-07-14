@@ -38,7 +38,7 @@ class WishlistController extends BaseController {
             </style>
         </head>
         <body>
-            <h2>Popis knjiga za čitanje</h2>
+            <h2>Popis knjiga za čitanje - korisnik <?= $_SESSION["username"] ?> </h2>
             <ul>
             <?php foreach($printList as $knjiga): ?>
                 <li><?= htmlspecialchars($knjiga->naziv) ?> — <?= htmlspecialchars($knjiga->autor) ?></li>
@@ -54,7 +54,8 @@ class WishlistController extends BaseController {
         $dompdf->render();
 
         // Isporuči kao download
-        $dompdf->stream("procitane_knjige.pdf", ["Attachment" => true]);
+        $imeDatoteke = "Popis_knjiga_za_citanje-" . $_SESSION["username"] .".pdf";
+        $dompdf->stream($imeDatoteke, ["Attachment" => true]);
         exit();
     }
 

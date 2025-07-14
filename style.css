@@ -101,7 +101,7 @@ footer {
     color: #ECF0F1;
     padding: 0.5rem;
     margin-top: auto;
-    border-radius: 5px 5px 0 0;   /* samo gornji rub */
+    border-radius: 5px 5% 0 0;   /* samo gornji rub */
 }
 
 .book-row:hover,
