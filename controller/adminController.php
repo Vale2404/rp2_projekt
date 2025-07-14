@@ -79,7 +79,7 @@ class AdminController extends BaseController {
         $this->provjeraAdmina();
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $id = intval($_POST['id']);
+            $id = intval($_POST['book_id']);
             $ls = new LibraryService($this->registry->db);
             $ls->deleteBook($id);
             http_response_code(200);

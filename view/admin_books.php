@@ -70,7 +70,7 @@
             if(!confirm(`Jeste li sigurni da želite obrisati knjigu "${naziv}" autora ${autor}?`))
                 return;
             let id = $(this).closest('tr').data('id');
-            $.post('index.php?rt=admin/deleteBook', {id: id}, function(){
+            $.post('index.php?rt=admin/deleteBook', {book_id: id}, function(){
                 $('#add-book-msg').removeClass('show success error').text('');
                 $('#add-book-msg')
                     .addClass('success show')

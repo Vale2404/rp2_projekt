@@ -54,10 +54,10 @@
             let $row = $(this).closest('tr');
             let id = $(this).closest('tr').data('id');
             let username = $row.find('td').eq(2).text();
-            if(!confirm(`Jeste li sigurni da želite obrisati korisnika "${username}"? Ovo će obrisati i sve njegove recenzije.`))
+            if(!confirm(`Jeste li sigurni da želite obrisati korisnika "${username}"?`))
                 return;
             $.post('index.php?rt=admin/deleteUser', {user_id: id}, function(){
-                $('#users-msg').removeClass().addClass('success show').text("Obrisan korisnik i sve njegove recenzije.");
+                $('#users-msg').removeClass().addClass('success show').text("Korisnik uspješno obrisan.");
                 setTimeout(() => { $('#users-msg').removeClass('show'); }, 2000);
                 ucitajKorisnike();
             }).fail(function() {

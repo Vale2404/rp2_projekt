@@ -86,11 +86,17 @@ class UserService {
             if($korisnik['jel_admin'] == 1 && $_SESSION['user_id'] != $user_id) 
                 exit('Ne možete obrisati drugog admina!');
 
-			$st1 = $this->db->prepare('DELETE FROM Recenzije WHERE ID_Korisnika = :id');
-			$st1->execute(['id' => $user_id]);
+			$st = $this->db->prepare('DELETE FROM Recenzije WHERE ID_Korisnika = :id');
+			$st->execute(['id' => $user_id]);
 
-            $st2 = $this->db->prepare('DELETE FROM Korisnici WHERE ID = :id');
-			$st2->execute(['id' => $user_id]);
+            $st = $this->db->prepare('DELETE FROM Zelje WHERE ID_Korisnika = :id');
+			$st->execute(['id' => $user_id]);
+
+            $st = $this->db->prepare('DELETE FROM Procitane WHERE ID_Korisnika = :id');
+			$st->execute(['id' => $user_id]);
+
+            $st = $this->db->prepare('DELETE FROM Korisnici WHERE ID = :id');
+			$st->execute(['id' => $user_id]);
         } catch(PDOException $e) {
             exit('PDO error ' . $e->getMessage());
         }

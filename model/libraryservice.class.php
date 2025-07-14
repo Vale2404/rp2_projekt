@@ -73,7 +73,16 @@ class LibraryService {
 
     public function deleteBook($book_id) {
         try {
-            $st = $this->db->prepare('DELETE FROM Knjige where id=?');
+            $st = $this->db->prepare('DELETE FROM Zelje WHERE ID_Knjige=?');
+            $st->execute([$book_id]);
+
+            $st = $this->db->prepare('DELETE FROM Procitane WHERE ID_Knjige=?');
+            $st->execute([$book_id]);
+
+            $st = $this->db->prepare('DELETE FROM Recenzije WHERE ID_Knjige=?');
+            $st->execute([$book_id]);
+
+            $st = $this->db->prepare('DELETE FROM Knjige WHERE ID=?');
             $st->execute([$book_id]);
         } catch (PDOException $e) {
             exit('PDO error ' . $e->getMessage());
