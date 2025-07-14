@@ -38,7 +38,14 @@ class LibraryService {
 
     public function getBook($temp_book_id) {
         try {
-            $st = $this->db->prepare('SELECT * FROM Knjige WHERE `ID` = :id');
+            $st = $this->db->prepare(
+                'SELECT k.ID, k.Autor, k.Naziv, k.Zanr, k.Slika_naslovnice, k.Godina, k.Opis,
+                AVG(r.Ocjena) AS Prosjecna_ocjena
+                FROM Knjige k
+                LEFT JOIN Recenzije r ON k.ID = r.ID_Knjige
+                WHERE k.ID = :id
+                GROUP BY k.ID, k.Autor, k.Naziv, k.Zanr, k.Slika_naslovnice, k.Godina, k.Opis'
+            );
             $st->execute(['id' => $temp_book_id]);
             $row = $st->fetch();
             if ($row === false) {
@@ -62,7 +69,7 @@ class LibraryService {
 
     public function addBook($Autor, $Naziv, $Zanr, $Slika_naslovnice, $Godina, $Opis) {
         try {
-            $st = $this->db->prepare('INSERT INTO Knjige (Autor, Naziv, Zanr, Slika_naslovnice, Godina, Opis, Prosjecna_ocjena) VALUES (:Autor, :Naziv, :Zanr, :Slika_naslovnice, :Godina, :Opis, 0)');
+            $st = $this->db->prepare('INSERT INTO Knjige (Autor, Naziv, Zanr, Slika_naslovnice, Godina, Opis, Prosjecna_ocjena) VALUES (:Autor, :Naziv, :Zanr, :Slika_naslovnice, :Godina, :Opis)');
             $st->execute([
                 'Autor' => $Autor,
                 'Naziv' => $Naziv,
@@ -96,7 +103,15 @@ class LibraryService {
 
     public function getWishList($user_id) {
         try {
-            $st = $this->db->prepare('SELECT k.* FROM Knjige k INNER JOIN Zelje z ON k.ID = z.ID_Knjige WHERE z.ID_Korisnika = :user_id');
+            $st = $this->db->prepare(
+                'SELECT k.ID, k.Autor, k.Naziv, k.Zanr, k.Slika_naslovnice, k.Godina, k.Opis,
+                AVG(r.Ocjena) AS Prosjecna_ocjena
+                FROM Knjige k
+                INNER JOIN Zelje z ON k.ID = z.ID_Knjige
+                LEFT JOIN Recenzije r ON k.ID = r.ID_Knjige
+                WHERE z.ID_Korisnika = :user_id
+                GROUP BY k.ID, k.Autor, k.Naziv, k.Zanr, k.Slika_naslovnice, k.Godina, k.Opis'
+            );
             $st->execute(['user_id' => $user_id]);
         } catch(PDOException $e) {
             exit('PDO error ' . $e->getMessage());
@@ -119,7 +134,15 @@ class LibraryService {
 
     public function getReadList($user_id) {
         try {
-            $st = $this->db->prepare('SELECT k.* FROM Knjige k INNER JOIN Procitane p ON k.ID = p.ID_Knjige WHERE p.ID_Korisnika = :user_id');
+            $st = $this->db->prepare(
+                'SELECT k.ID, k.Autor, k.Naziv, k.Zanr, k.Slika_naslovnice, k.Godina, k.Opis,
+                AVG(r.Ocjena) AS Prosjecna_ocjena
+                FROM Knjige k
+                INNER JOIN Procitane p ON k.ID = p.ID_Knjige
+                LEFT JOIN Recenzije r ON k.ID = r.ID_Knjige
+                WHERE p.ID_Korisnika = :user_id
+                GROUP BY k.ID, k.Autor, k.Naziv, k.Zanr, k.Slika_naslovnice, k.Godina, k.Opis'
+            );
             $st->execute(['user_id' => $user_id]);
         } catch(PDOException $e) {
             exit('PDO error ' . $e->getMessage());
@@ -270,17 +293,21 @@ class LibraryService {
     }
 
     function getBySearchAndFilter( $search = '', $sort = '', $genre = []) {
-        $query = 'SELECT * FROM `Knjige`';
+        $query = 'SELECT k.ID, k.Autor, k.Naziv, k.Zanr, k.Slika_naslovnice, k.Godina, k.Opis,
+                AVG(r.Ocjena) AS Prosjecna_ocjena
+                FROM Knjige k
+                LEFT JOIN Recenzije r ON k.ID = r.ID_Knjige';;
         if($search !== '' || !empty($genre))
             $query .= ' WHERE ';
         if ($search !== '') {
-            $query .= '(`Naziv` LIKE :naziv_djela OR `Autor` LIKE :ime_autora)';
+            $query .= '(`k.Naziv` LIKE :naziv_djela OR `Autor` LIKE :ime_autora)';
         }
         if (!empty($genre)) {
             if ($search !== '')
                 $query .= ' AND ';
-            $query .= '`Zanr` IN (' . implode(', ', array_map([$this->db, 'quote'], $genre)) . ')';
+            $query .= '`k.Zanr` IN (' . implode(', ', array_map([$this->db, 'quote'], $genre)) . ')';
         }
+        $query .= ' GROUP BY k.ID, k.Autor, k.Naziv, k.Zanr, k.Slika_naslovnice, k.Godina, k.Opis';
         if ($sort !== '') {
             $query .= ' ORDER BY ' . $sort;
         }

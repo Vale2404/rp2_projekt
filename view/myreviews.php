@@ -59,7 +59,7 @@
                     </tr>
                 <?php endforeach; ?>
             </tbody>
-        </table>
+        </table><br><br>
     <?php endif; ?>
 </main>
 

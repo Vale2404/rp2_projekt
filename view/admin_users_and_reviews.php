@@ -17,7 +17,7 @@
             </thead>
             <tbody>
             </tbody>
-        </table>
+        </table><br><br>
         <div id="users-msg"></div>
     </section>
 
