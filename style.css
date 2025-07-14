@@ -989,3 +989,7 @@ body {
     font-size: 1.07rem;
     color: #3d5170;
 }
+
+.selected-user {
+    background-color: #f1e9c7 !important;
+}

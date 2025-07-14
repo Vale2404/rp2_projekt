@@ -198,37 +198,43 @@ class LibraryService {
         return $st->fetchAll();
     }
 
-public function getMostReadBooks($broj) {
-    $st = $this->db->prepare(
-        'SELECT k.*, COUNT(p.ID_Knjige) AS broj_citanja
-         FROM Knjige k
-         LEFT JOIN Procitane p ON p.ID_Knjige = k.ID
-         GROUP BY k.ID
-         ORDER BY broj_citanja DESC
-         LIMIT :broj'
-    );
-    $st->bindValue(':broj', $broj, PDO::PARAM_INT);
-    $st->execute();
-    return $st->fetchAll();
-}
+    public function getMostReadBooks($broj) {
+        $st = $this->db->prepare(
+            'SELECT k.*, COUNT(p.ID_Knjige) AS broj_citanja
+            FROM Knjige k
+            LEFT JOIN Procitane p ON p.ID_Knjige = k.ID
+            GROUP BY k.ID
+            ORDER BY broj_citanja DESC
+            LIMIT :broj'
+        );
+        $st->bindValue(':broj', $broj, PDO::PARAM_INT);
+        $st->execute();
+        return $st->fetchAll();
+    }
 
     public function getAllCommentsFromUser($user_id) {
         try {
-            $st = $this->db->prepare('SELECT * FROM Recenzije WHERE ID_Korisnika = :id');
+            $st = $this->db->prepare(
+                'SELECT Recenzije.*, Knjige.Naziv
+                FROM Recenzije
+                JOIN Knjige ON Recenzije.ID_Knjige = Knjige.ID
+                WHERE Recenzije.ID_Korisnika = :id'
+            );
             $st->execute(['id' => $user_id]);
         } catch(PDOException $e) {
             exit('PDO error ' . $e->getMessage());
         }
         $arr = array();
-		while($row = $st->fetch()) {
-			$arr[] = new Review(
-                $row['ID_Korisnika'],
-                $row['ID_Knjige'],
-                $row['Komentar'],
-                $row['Ocjena']
-            );
+        while($row = $st->fetch()) {
+            $arr[] = [
+                'ID_Korisnika' => $row['ID_Korisnika'],
+                'ID_Knjige'    => $row['ID_Knjige'],
+                'Komentar'     => $row['Komentar'],
+                'Ocjena'       => $row['Ocjena'],
+                'Naziv'        => $row['Naziv']
+            ];
         }
-		return $arr;
+        return $arr;
     }
 
     public function deleteReview($user_id, $book_id) {
