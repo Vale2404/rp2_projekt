@@ -69,7 +69,7 @@ class LibraryService {
 
     public function addBook($Autor, $Naziv, $Zanr, $Slika_naslovnice, $Godina, $Opis) {
         try {
-            $st = $this->db->prepare('INSERT INTO Knjige (Autor, Naziv, Zanr, Slika_naslovnice, Godina, Opis, Prosjecna_ocjena) VALUES (:Autor, :Naziv, :Zanr, :Slika_naslovnice, :Godina, :Opis)');
+            $st = $this->db->prepare('INSERT INTO Knjige (Autor, Naziv, Zanr, Slika_naslovnice, Godina, Opis) VALUES (:Autor, :Naziv, :Zanr, :Slika_naslovnice, :Godina, :Opis)');
             $st->execute([
                 'Autor' => $Autor,
                 'Naziv' => $Naziv,
