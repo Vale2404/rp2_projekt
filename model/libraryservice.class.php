@@ -296,7 +296,7 @@ class LibraryService {
         $query = 'SELECT k.ID, k.Autor, k.Naziv, k.Zanr, k.Slika_naslovnice, k.Godina, k.Opis,
                 AVG(r.Ocjena) AS Prosjecna_ocjena
                 FROM Knjige k
-                LEFT JOIN Recenzije r ON k.ID = r.ID_Knjige';;
+                LEFT JOIN Recenzije r ON k.ID = r.ID_Knjige';
         if($search !== '' || !empty($genre))
             $query .= ' WHERE ';
         if ($search !== '') {
