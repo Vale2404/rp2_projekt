@@ -9,11 +9,15 @@ class LoginController {
     }
 
     public function index() {
+        session_unset();
+        session_destroy();
+
         $this->login();
     }
 
 
     public function login() {
+        session_start();
 
         $info = null;
         if (isset($_GET['registered']) && $_GET['registered'] == 1) {
