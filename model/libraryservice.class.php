@@ -300,12 +300,12 @@ class LibraryService {
         if($search !== '' || !empty($genre))
             $query .= ' WHERE ';
         if ($search !== '') {
-            $query .= '(`k.Naziv` LIKE :naziv_djela OR `Autor` LIKE :ime_autora)';
+            $query .= '(k.Naziv LIKE :naziv_djela OR k.Autor LIKE :ime_autora)';
         }
         if (!empty($genre)) {
             if ($search !== '')
                 $query .= ' AND ';
-            $query .= '`k.Zanr` IN (' . implode(', ', array_map([$this->db, 'quote'], $genre)) . ')';
+            $query .= 'k.Zanr IN (' . implode(', ', array_map([$this->db, 'quote'], $genre)) . ')';
         }
         $query .= ' GROUP BY k.ID, k.Autor, k.Naziv, k.Zanr, k.Slika_naslovnice, k.Godina, k.Opis';
         if ($sort !== '') {
